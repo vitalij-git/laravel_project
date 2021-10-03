@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class BookItemSeeder extends Seeder
 {
@@ -11,6 +13,15 @@ class BookItemSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('book_items')->insert([
+            'title' => Str::random(10),
+            'book_code' => rand(1,10),
+            'pages' => rand(100,300),
+            'description' => Str::random(10),
+            'author_id' => rand(1,4)
+        ]);
+        factory(App\book_item::class, 200)->create()->each(function ($user) {
+            $user->posts()->save(factory(App\post::class)->make());
+        });
     }
 }
