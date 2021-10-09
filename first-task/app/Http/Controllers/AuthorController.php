@@ -56,7 +56,7 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        //
+        return view('author.show', ['author' => $author]);
     }
 
     /**
@@ -67,7 +67,7 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+        return view("author.edit",["author"=>$author]);
     }
 
     /**
@@ -79,7 +79,16 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+        $author = new Author;
+
+
+        $author->name = $request->author_name;
+        $author->surname = $request->author_surname;
+        $author->username = $request->author_username;
+
+        $author->save();
+
+        return redirect()->route('author.index');
     }
 
     /**
@@ -90,6 +99,7 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $author->delete();
+        return redirect()->route("author.index");
     }
 }

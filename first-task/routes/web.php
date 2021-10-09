@@ -20,9 +20,16 @@ Route::prefix('authors')->group(function(){
     Route::get('','AuthorController@index')->name('author.index');
     Route::get('create', 'AuthorController@create')->name('author.create');
     Route::post('store', 'AuthorController@store')->name('author.store');
+    Route::post('edit/{author}', 'AuthorController@edit')->name('author.edit');
+    Route::post('update/{author}', 'AuthorController@update')->name('author.update');
+    Route::post('delete/{author}','AuthorController@destroy')->name('author.destroy');
+    Route::post('show/{author}', 'AuthorController@show')->name('author.show');
 });
 Route::prefix('book_items')->group(function(){
     Route::get('','BookItemController@index')->name('book_items.index');
     Route::get('create', 'BookItemController@create')->name('book_items.create');
     Route::post('store', 'BookItemController@store')->name('book_items.store');
 });
+
+
+

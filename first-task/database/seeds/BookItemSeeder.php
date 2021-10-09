@@ -20,8 +20,5 @@ class BookItemSeeder extends Seeder
             'description' => Str::random(10),
             'author_id' => rand(1,4)
         ]);
-        factory(App\book_item::class, 200)->create()->each(function ($user) {
-            $user->posts()->save(factory(App\post::class)->make());
-        });
     }
 }

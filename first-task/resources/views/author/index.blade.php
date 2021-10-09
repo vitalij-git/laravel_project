@@ -56,26 +56,32 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        {{-- <div class="flex-center position-ref full-height"> --}}
             <table>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Surname</th>
                     <th>Username</th>
+                    <th>Edit</th>
                 </tr>
 
                 @foreach ($authors as $author)
                     <tr>
                         <td>{{ $author->id }}</td>
-                        <td>{{ $author->name }}</td>
+                        <td><a href="{{route('author.show', [$author])}}">{{ $author->name }}</a></td>
                         <td>{{ $author->surname }} </td>
                         <td>{{ $author->username }} </td>
+                        <td><a href="{{route('author.edit',[$author])}}">Edit</a></td>
+                        <td><form action="{{route('author.destroy', [$author])}}" method="post">
+                        @csrf
+                        <button type="submit">Delete</button>
+                        </form></td>
                     </tr>
                 @endforeach
 
 
             </table>
-        </div>
+        {{-- </div> --}}
     </body>
 </html>
