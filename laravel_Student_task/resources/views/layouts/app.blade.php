@@ -18,6 +18,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/main_style.css') }}">
+    <style>
+        .create-btn{
+            margin:20px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
