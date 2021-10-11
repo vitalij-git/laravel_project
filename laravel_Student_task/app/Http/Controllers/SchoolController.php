@@ -43,6 +43,14 @@ class SchoolController extends Controller
         $school->description = $request->school_description;
         $school->place = $request->school_place;
         $school->phone = $request->school_phone;
+        if($request->hasFile("school_logo")){
+
+            $file = $request->file("school_logo");
+            $extention=$file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move("uploads/school", $filename);
+            $school->logo=$filename;
+        }
         $school->save();
 
         return redirect()->route('school.index');

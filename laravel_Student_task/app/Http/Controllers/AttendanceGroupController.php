@@ -43,7 +43,14 @@ class AttendanceGroupController extends Controller
         $attendance_group->description = $request->attendance_group_description;
         $attendance_group->difficulty = $request->attendance_group_difficulty;
         $attendance_group->school_id = $request->attendance_group_school_id;
+        if($request->hasFile("attendance_group_school_logo")){
 
+            $file = $request->file("attendance_group_school_logo");
+            $extention=$file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move("uploads/group", $filename);
+            $attendance_group->logo=$filename;
+        }
         $attendance_group->save();
 
         return redirect()->route('attendance_group.index');

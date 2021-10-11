@@ -17,7 +17,7 @@
                         @endif
 
                         <div class="content">
-                            <form action="{{route('school.store')}}" method="POST">
+                            <form action="{{route('school.store')}}" method="POST" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name</label>
                                     <input type="text" name="school_name" class="form-control" placeholder="Enter school name"  />
@@ -34,8 +34,12 @@
                                     <label  class="form-label">Phone</label>
                                     <input type="number" class="form-control" name="school_phone" placeholder="Enter school phone" />
                                 </div>
+                                <div class="mb-3">
+                                    <label  class="form-label">Logo</label>
+                                    <input type="file" class="form-control" name="school_logo"  />
+                                </div>
                                 @csrf
-                                <button type="submit" class="btn btn_primary">Create new </button>
+                                <button type="submit" class="btn btn-primary">Create new </button>
                                 <a href="{{route('school.index')}}" class="btn btn-primary">Back</a>
                             </form>
                         </div>

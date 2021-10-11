@@ -24,7 +24,7 @@
                         </div>
                         <div class="mb-3">
                             <label  class="form-label">Surname</label>
-                            <input type="text" name="school_description" class="student_surname" placeholder="Enter student surname"  />
+                            <input type="text" name="student_surname" class="form-control" placeholder="Enter student surname"  />
                         </div>
                         <div class="mb-3">
                             <label  class="form-label">Group</label>
@@ -35,7 +35,7 @@
                             <input type="text" class="form-control" name="student_image_url" placeholder="Enter student image link" />
                         </div>
                         @csrf
-                        <button type="submit" class="btn btn_primary">Create new </button>
+                        <button type="submit" class="btn btn-primary">Create new </button>
                         <a href="{{route('student.index')}}" class="btn btn-primary">Back</a>
                     </form>
                 </div>

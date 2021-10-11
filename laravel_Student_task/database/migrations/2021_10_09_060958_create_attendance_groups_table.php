@@ -19,6 +19,7 @@ class CreateAttendanceGroupsTable extends Migration
             $table->longText("description");
             $table->string("difficulty");
             $table->bigInteger("school_id");
+            $table->string("logo");
             $table->timestamps();
         });
     }

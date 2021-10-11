@@ -16,8 +16,9 @@ class SchoolSeeder extends Seeder
             "name"=> $faker->company(),
             "description"=>$faker->text(),
             "place"=>$faker->address() ,
-            "phone"=>"86".$faker->randomNumber(7, true)
+            "phone"=>"86".$faker->randomNumber(7, true),
+            "logo"=>$faker->imageUrl(640, 480, 'animals', true)
         ]);
-        factory(App\School::class, 10)->create();
+        //factory(App\School::class, 10)->create();
     }
 }

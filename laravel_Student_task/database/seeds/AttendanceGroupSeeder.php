@@ -17,8 +17,9 @@ class AttendanceGroupSeeder extends Seeder
             "name"=> $faker->company(),
             "description"=>$faker->text(),
             "difficulty"=>$diffucilty[rand(0,4)],
-            "school_id"=>rand(1,10)
+            "school_id"=>rand(1,10),
+            "logo"=> $faker->imageUrl(640, 480, 'animals', true)
         ]);
-        factory(App\AttendanceGroup::class, 20)->create();
+        //factory(App\AttendanceGroup::class, 20)->create();
     }
 }
