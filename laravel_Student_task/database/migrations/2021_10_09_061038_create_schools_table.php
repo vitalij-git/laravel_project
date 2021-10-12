@@ -19,7 +19,6 @@ class CreateSchoolsTable extends Migration
             $table->longText("description");
             $table->string("place");
             $table->bigInteger("phone");
-            $table->string("logo");
             $table->timestamps();
         });
     }

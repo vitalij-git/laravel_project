@@ -12,12 +12,12 @@ class StudentSeeder extends Seeder
      */
     public function run( Faker $faker)
     {
-        DB::table('students')-> insert([
-            "name"=> $faker->firstName(),
-            "surname"=>$faker->lastName(),
-            "group_id"=>rand(1,20),
-            "image_url"=>$faker->url()
-        ]);
+        // DB::table('students')-> insert([
+        //     "name"=> $faker->firstName(),
+        //     "surname"=>$faker->lastName(),
+        //     "group_id"=>rand(1,20),
+        //     "image_url"=>$faker->imageUrl(640, 480, 'animals', true)
+        // ]);
         factory(App\Student::class, 100)->create();
     }
 }

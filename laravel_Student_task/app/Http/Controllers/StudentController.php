@@ -41,6 +41,17 @@ class StudentController extends Controller
         $student->surname = $request->student_surname;
         $student->group_id = $request->student_group_id;
         $student->image_url = $request->student_image_url;
+        if($request->hasFile("student_image_url")){
+
+            $file = $request->file("student_image_url");
+            $extention=$file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move("uploads/student", $filename);
+            $student->image_url = '/student/'.$filename;
+        }
+        else{
+            $student->image_url='uploads/images/placeholder.png';
+        }
 
         $student->save();
 
@@ -82,8 +93,14 @@ class StudentController extends Controller
         $student->name = $request->student_name;
         $student->surname = $request->student_surname;
         $student->group_id = $request->student_group_id;
-        $student->image_url = $request->student_image_url;
+        if($request->hasFile("student_image_url")){
 
+            $file = $request->file("student_image_url");
+            $extention=$file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move("uploads/student", $filename);
+            $student->image_url = '/uploads/student/'.$filename;
+        }
         $student->save();
 
         return redirect()->route('student.index');

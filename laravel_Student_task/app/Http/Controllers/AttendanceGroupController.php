@@ -49,7 +49,7 @@ class AttendanceGroupController extends Controller
             $extention=$file->getClientOriginalExtension();
             $filename = time().'.'.$extention;
             $file->move("uploads/group", $filename);
-            $attendance_group->logo=$filename;
+            $attendance_group->logo = $filename;
         }
         $attendance_group->save();
 

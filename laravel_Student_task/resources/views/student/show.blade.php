@@ -6,5 +6,6 @@
 <p>{{$student->name}}</p>
 <p>{{$student->surname}}</p>
 <p>{{$student->group_id}}</p>
-<p>{{$student->image_url}}</p>
+<p><td><img src="{{$student->image_url}}" alt="{{$student->name}}"  width="600px"/></td></p>
+<a href="{{route('student.index')}}" class="btn btn-primary">Back</a>
 @endsection

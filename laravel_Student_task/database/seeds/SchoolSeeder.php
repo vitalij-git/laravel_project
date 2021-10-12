@@ -12,13 +12,13 @@ class SchoolSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        DB::table('schools')-> insert([
-            "name"=> $faker->company(),
-            "description"=>$faker->text(),
-            "place"=>$faker->address() ,
-            "phone"=>"86".$faker->randomNumber(7, true),
-            "logo"=>$faker->imageUrl(640, 480, 'animals', true)
-        ]);
-        //factory(App\School::class, 10)->create();
+        // DB::table('schools')-> insert([
+        //     "name"=> $faker->company(),
+        //     "description"=>$faker->text(),
+        //     "place"=>$faker->address() ,
+        //     "phone"=>"86".$faker->randomNumber(7, true),
+        //
+        // ]);
+        factory(App\School::class, 10)->create();
     }
 }
