@@ -24,7 +24,8 @@
                     </div>
                     <div class="mb-3">
                         <label  class="form-label">Description</label>
-                        <input type="text" name="attendance_group_description" class="form-control" placeholder="Enter group description"  />
+                        <textarea type="text" name="attendance_group_description" class="form-control summernote" placeholder="Enter group description"  >
+                        </textarea>
                     </div>
                     <div class="mb-3">
                         <label  class="form-label">Difficulty</label>
@@ -43,4 +44,9 @@
                     <a href="{{route('attendance_group.store')}}" class="btn btn-primary">Back</a>
                 </form>
             </div>
+            <script>
+                $(document).ready(function() {
+                 $('.summernote').summernote();
+                });
+            </script>
             @endsection

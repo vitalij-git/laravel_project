@@ -15,7 +15,7 @@ class AttendanceGroupController extends Controller
     public function index()
     {
         $attendanceGroup = AttendanceGroup::all();
-        return view("attendance_group.index",['attendanceGroups' => $attendanceGroup]);
+        return view("attendance_group.index",['attendance_groups' => $attendanceGroup]);
     }
 
     /**
@@ -25,7 +25,8 @@ class AttendanceGroupController extends Controller
      */
     public function create()
     {
-        return view("attendance_group.create");
+
+        return view("attendance_group.create" );
     }
 
     /**
@@ -36,22 +37,22 @@ class AttendanceGroupController extends Controller
      */
     public function store(Request $request)
     {
-        $attendance_group = new AttendanceGroup;
+        $attendanceGroup = new AttendanceGroup;
 
 
-        $attendance_group->name = $request->attendance_group_name;
-        $attendance_group->description = $request->attendance_group_description;
-        $attendance_group->difficulty = $request->attendance_group_difficulty;
-        $attendance_group->school_id = $request->attendance_group_school_id;
+        $attendanceGroup->name = $request->attendance_group_name;
+        $attendanceGroup->description = $request->attendance_group_description;
+        $attendanceGroup->difficulty = $request->attendance_group_difficulty;
+        $attendanceGroup->school_id = $request->attendance_group_school_id;
         if($request->hasFile("attendance_group_school_logo")){
 
             $file = $request->file("attendance_group_school_logo");
             $extention=$file->getClientOriginalExtension();
             $filename = time().'.'.$extention;
             $file->move("uploads/group", $filename);
-            $attendance_group->logo = $filename;
+            $attendanceGroup->logo = $filename;
         }
-        $attendance_group->save();
+        $attendanceGroup->save();
 
         return redirect()->route('attendance_group.index');
     }
@@ -87,15 +88,13 @@ class AttendanceGroupController extends Controller
      */
     public function update(Request $request, AttendanceGroup $attendanceGroup)
     {
-        $attendance_group = new AttendanceGroup;
 
+        $attendanceGroup->name = $request->attendance_group_name;
+        $attendanceGroup->description = $request->attendance_group_description;
+        $attendanceGroup->difficulty = $request->attendance_group_difficulty;
+        $attendanceGroup->school_id = $request->attendance_group_school_id;
 
-        $attendance_group->name = $request->attendance_group_name;
-        $attendance_group->description = $request->attendance_group_description;
-        $attendance_group->difficulty = $request->attendance_group_difficulty;
-        $attendance_group->school_id = $request->attendance_group_school_id;
-
-        $attendance_group->save();
+        $attendanceGroup->save();
 
         return redirect()->route('attendance_group.index');
     }

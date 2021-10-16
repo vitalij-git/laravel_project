@@ -13,7 +13,11 @@
         </div>
         <div class="mb-3">
             <label  class="form-label">Group</label>
-            <input type="number" class="form-control" name="student_group_id" value="{{$student->group_id}}" />
+            <select type="number"  class="form-control" name="student_group_id" >
+                @foreach ($attendance_groups as $attendance_group )
+                <option value="{{$attendance_group->id}}" @if($attendance_group->id ==$student->group_id) selected @endif > {{$attendance_group->name}}</option>
+                @endforeach
+                </select>
         </div>
         <div class="mb-3">
             <label  class="form-label">Image</label>

@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Generator as Faker;
+use App\Student;
 class StudentSeeder extends Seeder
 {
     /**
@@ -18,6 +19,6 @@ class StudentSeeder extends Seeder
         //     "group_id"=>rand(1,20),
         //     "image_url"=>$faker->imageUrl(640, 480, 'animals', true)
         // ]);
-        factory(App\Student::class, 100)->create();
+        factory(Student::class, 100)->create();
     }
 }

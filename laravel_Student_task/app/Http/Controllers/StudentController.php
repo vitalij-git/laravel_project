@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Student;
+use App\AttendanceGroup;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -24,8 +25,8 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view("student.create");
+    {   $attendanceGroup =AttendanceGroup::all();
+        return view("student.create",['attendance_groups' => $attendanceGroup]);
     }
 
     /**
@@ -76,8 +77,8 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Student $student)
-    {
-        return view('student.edit', ['student' => $student]);
+    {   $attendanceGroup =AttendanceGroup::all();
+        return view('student.edit', ['student' => $student,'attendance_groups' =>$attendanceGroup]);
     }
 
     /**
@@ -89,7 +90,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        $student =new Student;
+
         $student->name = $request->student_name;
         $student->surname = $request->student_surname;
         $student->group_id = $request->student_group_id;

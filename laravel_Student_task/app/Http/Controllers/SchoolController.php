@@ -87,8 +87,6 @@ class SchoolController extends Controller
      */
     public function update(Request $request, School $school)
     {
-        $school = new School;
-
 
         $school->name = $request->school_name;
         $school->description = $request->school_description;

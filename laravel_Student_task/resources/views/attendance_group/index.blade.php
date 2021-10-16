@@ -5,15 +5,15 @@
             <a href="{{route('attendance_group.create')}}" class="btn btn-primary create-btn" >Create</a>
             <table class="table">
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Difficulty</th>
-                    <th>School</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>{!! _('ID') !!}</th>
+                    <th>{!! _('Name') !!}</th>
+                    <th>{!! _('Difficulty') !!}</th>
+                    <th>{!! _('School') !!}</th>
+                    <th>{!! _('Edit') !!}</th>
+                    <th>{!! _('Delete') !!}</th>
                 </tr>
 
-                @foreach ($attendanceGroups as $attendance_group)
+                @foreach ($attendance_groups as $attendance_group)
                     <tr>
                         <td>{{ $attendance_group->id }}</td>
                         <td><a href="{{route('attendance_group.show', [$attendance_group])}}">{{ $attendance_group->name }}</a></td>

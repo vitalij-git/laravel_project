@@ -19,6 +19,6 @@ class SchoolSeeder extends Seeder
         //     "phone"=>"86".$faker->randomNumber(7, true),
         //
         // ]);
-        factory(App\School::class, 10)->create();
+      //  factory(App\School::class, 10)->create();
     }
 }

@@ -24,7 +24,8 @@
                                 </div>
                                 <div class="mb-3">
                                     <label  class="form-label">Description</label>
-                                    <input type="text" name="school_description" class="form-control" placeholder="Enter school description"  />
+                                    <textarea type="text" name="school_description" class="form-control summernote" placeholder="Enter school description"  >
+                                </textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label  class="form-label">Place</label>
@@ -43,5 +44,9 @@
                                 <a href="{{route('school.index')}}" class="btn btn-primary">Back</a>
                             </form>
                         </div>
-
+                        <script>
+                            $(document).ready(function() {
+                             $('.summernote').summernote();
+                            });
+                        </script>
                         @endsection

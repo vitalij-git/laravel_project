@@ -20,6 +20,6 @@ class AttendanceGroupSeeder extends Seeder
         //     "school_id"=>rand(1,10),
         //
         // ]);
-        factory(App\AttendanceGroup::class, 50)->create();
+        //factory(App\AttendanceGroup::class, 50)->create();
     }
 }
