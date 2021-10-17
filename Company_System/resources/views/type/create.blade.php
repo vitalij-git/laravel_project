@@ -11,6 +11,16 @@
             <label for="type_description" class="form-label">Enter a type description</label>
             <textarea class="form-control summernote" name="type_description" rows="5"></textarea>
           </div>
+          <div class="form-group row">
+            <div class="col-md-6">
+                 <select class="form-control" name="type_company_id">
+                    @foreach ($companies as $company)
+                    <option value="{{$company->id}}">{{$company->title}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+          @csrf
           <button type="submit" class="btn btn-primary">Save</button>
           <a href="{{route('type.index')}}" class="btn btn-primary">Back</a>
     </form>

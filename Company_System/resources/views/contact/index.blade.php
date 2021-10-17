@@ -1,6 +1,4 @@
-@extends('layouts.app')
 
-@section('content')
 
 @extends('layouts.app')
 
@@ -24,17 +22,21 @@
             {!! _("Edit") !!}
         </th>
         <th>
+            {!! _("Show") !!}
+        </th>
+        <th>
             {!! _("Delete") !!}
         </th>
     </tr>
-    @foreach ($types as $type)
+    @foreach ($contacts as $contact)
         <tr>
-            <td>{{$type->id}}</td>
-            <td>{{$type->title}}</td>
-            <td>{{$type->phone}}</td>
-            <td>{{$type->email}}</td>
-            <td><a href="{{route('contact.edit',[$company])}}" class="btn btn-primary">Edit</a></td>
-            <td><form action="{{route('contact.destroy', [$company])}}" method="post">
+            <td>{{$contact->id}}</td>
+            <td>{{$contact->title}}</td>
+            <td>{{$contact->phone}}</td>
+            <td>{{$contact->email}}</td>
+            <td><a href="{{route('contact.edit',[$contact])}}" class="btn btn-primary">Edit</a></td>
+            <td><a href="{{route('contact.show',[$contact])}}" class="btn btn-primary">Show</a></td>
+            <td><form action="{{route('contact.destroy', [$contact])}}" method="post">
             @csrf
             <button type="submit" class="btn btn-danger">Delete</button>
             </form></td>
@@ -44,4 +46,3 @@
 
 @endsection
 
-@endsection

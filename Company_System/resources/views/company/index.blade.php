@@ -27,7 +27,7 @@
         <tr>
             <td>{{$company->id}}</td>
             <td>{{$company->title}}</td>
-            <td><img src="{{$company->logo}}" alt="{{$company->title}}"/></td>
+            <td><img src="{{$company->logo}}" width="150" alt="{{$company->title}}"/></td>
             <td><a href="{{route('company.edit',[$company])}}" class="btn btn-primary">Edit</a></td>
             <td><a href="{{route('company.show',[$company])}}" class="btn btn-primary">Show</a></td>
             <td><form action="{{route('company.destroy', [$company])}}" method="post">

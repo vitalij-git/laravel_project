@@ -9,4 +9,9 @@ class Company extends Model
     public function companyContact() {
         return $this->belongsTo(Contact::class, 'contact_id', 'id');
     }
+    // public function company_content()
+    // {
+    //     return $this->hasOne('App\Contact');
+    // }
 }
+

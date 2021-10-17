@@ -7,7 +7,6 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-
                     <th>Phone</th>
                     <th>Edit</th>
                     <th>Delete</th>

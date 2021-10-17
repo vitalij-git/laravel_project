@@ -43,11 +43,15 @@ class CompanyController extends Controller
         $company->description = $request->company_description;
         if($request->hasFile("company_logo")){
 
+            // $imageName = time().'.'.$request->company_logo->extension();
+            // $company->logo = '/uploads/company/'.$imageName;
+            // $request->company_logo->move(public_path('uploads/company'), $imageName);
+
             $file = $request->file("company_logo");
             $extention=$file->getClientOriginalExtension();
             $filename = time().'.'.$extention;
             $file->move("uploads/company", $filename);
-            $company->logo = $filename;
+            $company->logo = "uploads/company/".$filename;
         }
         else{
             $company->logo='uploads/images/placeholder.png';
@@ -96,7 +100,7 @@ class CompanyController extends Controller
             $extention=$file->getClientOriginalExtension();
             $filename = time().'.'.$extention;
             $file->move("uploads/company", $filename);
-            $company->logo = $filename;
+            $company->logo = "uploads/company/".$filename;
         }
         $company->save();
 

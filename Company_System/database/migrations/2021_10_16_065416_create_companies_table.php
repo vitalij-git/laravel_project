@@ -18,7 +18,8 @@ class CreateCompaniesTable extends Migration
             $table->string("title");
             $table->longText("description");
             $table->string("logo");
-           // $table->bigInteger("contact_id");
+            $table->unsignedBigInteger("contact_id");
+            $table->foreign('contact_id')->references('id')->on('contacts');
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@
                     </select>
                 </div>
             </div>
+            @csrf
         <button type="submit" class="btn btn-primary">Update</button>
         <a href="{{route('type.index')}}" class="btn btn-primary">Back</a>
         </form>

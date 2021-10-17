@@ -1,10 +1,8 @@
+
 @extends('layouts.app')
 
 @section('content')
-@extends('layouts.app')
-
-@section('content')
-    <form action="{{route('city.create', [$contact])}}" method="post">
+    <form action="{{route('contact.update', [$contact])}}" method="post">
         <div class="mb-3">
             <label for="type_title" class="form-label">Contact title</label>
             <input type="text" class="form-control" name="contact_title" value="{{$contact->title}}">
@@ -29,10 +27,10 @@
             <label for="contact_city" class="form-label">Contact city</label>
             <input type="text" class="form-control" name="contact_city" value="{{$contact->city}}">
         </div>
+        @csrf
           <button type="submit" class="btn btn-primary">Update</button>
           <a href="{{route('contact.index')}}" class="btn btn-primary">Back</a>
     </form>
 
 @endsection
 
-@endsection

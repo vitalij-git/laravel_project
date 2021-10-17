@@ -14,8 +14,10 @@
             <label for="company_logo" class="form-label">Company logo</label>
             <input class="form-control " type="file" id="formFile" name="company_logo">
           </div>
-          <button type="submit" class="btn btn-primary">Update</button>
+          @csrf
+          <button type="submit" class="btn btn-primary">Edit</button>
           <a href="{{route('company.index')}}" class="btn btn-primary">Back</a>
+
     </form>
     <script>
         $(document).ready(function() {

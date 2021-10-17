@@ -9,6 +9,7 @@ $factory->define(Company::class, function (Faker $faker) {
     return [
         "title"=> $faker->company(),
         "description"=>$faker->text(),
-        "logo"=>$faker->imageUrl(150,150,null,true)
+        "logo"=>$faker->imageUrl(150,150,null,true),
+        "contact_id"=>factory(App\Contact::class)->create()->id
     ];
 });
