@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use Illuminate\Http\Request;
-
+use App\Contact;
 class CompanyController extends Controller
 {
     /**
@@ -14,8 +14,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
+        $contact =Contact::all();
         $company = Company::all();
-        return  view("company.index",['companies' => $company]);
+        return  view("company.index",['companies' => $company, 'contacts'=>$contact]);
     }
 
     /**
@@ -25,7 +26,8 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view("company.create" );
+        $contact =Contact::all();
+        return view("company.create", ['contacts'=>$contact] );
     }
 
     /**
@@ -41,6 +43,7 @@ class CompanyController extends Controller
 
         $company->title = $request->company_title;
         $company->description = $request->company_description;
+        $company->contact_id=$request->company_contact_id;
         if($request->hasFile("company_logo")){
 
             // $imageName = time().'.'.$request->company_logo->extension();
@@ -80,7 +83,8 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        return view("company.edit",['company' => $company]);
+        $contact =Contact::all();
+        return view("company.edit",['company' => $company, 'contacts'=>$contact]);
     }
 
     /**
@@ -94,6 +98,7 @@ class CompanyController extends Controller
     {
         $company->title = $request->company_title;
         $company->description = $request->company_description;
+        $company->contact_id=$request->company_contact_id;
         if($request->hasFile("company_logo")){
 
             $file = $request->file("company_logo");

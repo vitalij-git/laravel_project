@@ -14,6 +14,16 @@
             <label for="company_logo" class="form-label">Default file input example</label>
             <input class="form-control " type="file" name="company_logo">
           </div>
+          <div class="form-group row">
+            <label for="company_contact_id" class="form-label">Contact</label>
+            <div class="col-md-6">
+                 <select class="form-control" name="company_contact_id">
+                    @foreach ($contacts as $contact)
+                    <option value="{{$contact->id}}">{{$contact->title}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
           @csrf
           <button type="submit" class="btn btn-primary">Save</button>
           <a href="{{route('company.index')}}" class="btn btn-primary">Back</a>

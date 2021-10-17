@@ -14,6 +14,16 @@
             <label for="company_logo" class="form-label">Company logo</label>
             <input class="form-control " type="file" id="formFile" name="company_logo">
           </div>
+          <div class="form-group row">
+            <label for="company_contact_id" class="form-label">Contact</label>
+            <div class="col-md-6">
+                 <select class="form-control" name="company_contact_id">
+                    @foreach ($contacts as $contact)
+                    <option value="{{$contact->id}}" @if($contact->id == $company->contact_id) selected @endif >{{$contact->title}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
           @csrf
           <button type="submit" class="btn btn-primary">Edit</button>
           <a href="{{route('company.index')}}" class="btn btn-primary">Back</a>
