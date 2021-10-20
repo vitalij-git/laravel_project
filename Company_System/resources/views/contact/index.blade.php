@@ -4,6 +4,17 @@
 
 @section('content')
 <a href="{{route('contact.create')}}" class="btn btn-primary create-btn" >Create</a>
+@if(session()->has('error_message'))
+        <div class="alert alert-danger">
+            {{session()->get("error_message")}}
+        </div>
+    @endif
+
+    @if(session()->has('success_message'))
+        <div class="alert alert-success">
+            {{session()->get("success_message")}}
+        </div>
+    @endif
 <table class="table table-stripped">
     <tr>
         <th>

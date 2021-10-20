@@ -100,7 +100,12 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        $contact->delete();
-        return redirect()->route('contact.index');
+        $company_count=$contact->companyHasMany->count();
+
+        if($company_count==0){
+            $contact->delete();
+            return redirect()->route("contact.index")->with('success_message', 'kontaktas ištrinta sėkmingai');
+        }
+        return redirect()->route("contact.index")->with('error_message', 'kontaktas turi kompanija');
     }
 }

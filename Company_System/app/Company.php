@@ -11,7 +11,10 @@ class Company extends Model
     // }
     public function contact()
     {
-        return $this->belongsTo('App\Contact');
+        return $this->belongsTo(Contact::class, 'contact_id', 'id');
+    }
+    public function typeHasMany() {
+        return $this->hasMany(Type::class, 'company_id', 'id');
     }
 }
 

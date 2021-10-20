@@ -120,7 +120,13 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        $company->delete();
-        return redirect()->route('company.index');
+        $type_count=$company->typeHasMany->count();
+
+        if($type_count==0){
+            $company->delete();
+            return redirect()->route("company.index")->with('success_message', 'kompanija ištrinta sėkmingai');
+        }
+        return redirect()->route("company.index")->with('error_message', 'kompanija turi tipus');
+
     }
 }

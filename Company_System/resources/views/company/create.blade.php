@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> --}}
     <form action="{{route('company.store')}}" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="company_title" class="form-label">Company title</label>
@@ -8,7 +10,7 @@
           </div>
           <div class="mb-3">
             <label for="company_description" class="form-label">Enter a company description</label>
-            <textarea class="form-control summernote" name="company_description" rows="5"></textarea>
+            <textarea class="form-control summernote"  name="company_description"></textarea>
           </div>
           <div class="mb-3">
             <label for="company_logo" class="form-label">Default file input example</label>
