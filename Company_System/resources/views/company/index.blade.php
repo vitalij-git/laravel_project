@@ -25,6 +25,9 @@
             {!! _("Contact") !!}
         </th>
         <th>
+            {!! _("Type") !!}
+        </th>
+        <th>
             {!! _("Logo") !!}
         </th>
         <th>
@@ -42,6 +45,7 @@
             <td>{{$company->id}}</td>
             <td>{{$company->title}}</td>
             <td><a href="{{route('contact.show',[$company->contact])}}">{{$company->contact->title}}</a></td>
+            <td><a href="{{route('type.show',[$company->type])}}">{{$company->Type->title}}</a></td>
             <td><img src="{{$company->logo}}" width="150" alt="{{$company->title}}"/></td>
             <td><a href="{{route('company.edit',[$company])}}" class="btn btn-primary">Edit</a></td>
             <td><a href="{{route('company.show',[$company])}}" class="btn btn-primary">Show</a></td>

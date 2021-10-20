@@ -13,4 +13,8 @@ class Contact extends Model
     public function companyHasMany() {
         return $this->hasMany(Company::class, 'contact_id', 'id');
     }
+    public function company()
+    {
+        return $this->belongsTo(Company::class,  'id','contact_id');
+    }
 }

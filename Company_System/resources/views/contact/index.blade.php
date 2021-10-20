@@ -30,6 +30,9 @@
             {!! _("Email") !!}
         </th>
         <th>
+            {!! _("Company") !!}
+        </th>
+        <th>
             {!! _("Edit") !!}
         </th>
         <th>
@@ -45,6 +48,7 @@
             <td>{{$contact->title}}</td>
             <td>{{$contact->phone}}</td>
             <td>{{$contact->email}}</td>
+            <td><a href="{{route('company.show',[$contact->company])}}">{{$contact->company->title}}</a></td>
             <td><a href="{{route('contact.edit',[$contact])}}" class="btn btn-primary">Edit</a></td>
             <td><a href="{{route('contact.show',[$contact])}}" class="btn btn-primary">Show</a></td>
             <td><form action="{{route('contact.destroy', [$contact])}}" method="post">

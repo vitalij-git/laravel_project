@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Company;
 use Illuminate\Http\Request;
 use App\Contact;
+use App\Type;
 class CompanyController extends Controller
 {
     /**
@@ -16,7 +17,8 @@ class CompanyController extends Controller
     {
         $contact =Contact::all();
         $company = Company::all();
-        return  view("company.index",['companies' => $company, 'contacts'=>$contact]);
+        $type = Type::all();
+        return  view("company.index",['companies' => $company, 'contacts'=>$contact, 'types'=>$type]);
     }
 
     /**

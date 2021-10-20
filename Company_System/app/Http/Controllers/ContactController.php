@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
+use App\Company;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -15,7 +16,8 @@ class ContactController extends Controller
     public function index()
     {
         $contact= Contact::all();
-        return  view("contact.index",['contacts' => $contact]);
+        $company =Company::all();
+        return  view("contact.index",['contacts' => $contact, 'companies'=>$company]);
     }
 
     /**
