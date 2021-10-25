@@ -2,6 +2,19 @@
 
 @section('content')
 
+<a href="{{route('type.create')}}" class="btn btn-primary create-btn" >Create</a>
+
+@if(session()->has('error_message'))
+        <div class="alert alert-danger">
+            {{session()->get("error_message")}}
+        </div>
+ @endif
+
+<form action="{{route('type.search')}}" method="GET">
+    @csrf
+    <input type="text" name="search" placeholder="Enter search key" />
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
     <table class="table table-stripped">
             <tr>
                 <th>@sortablelink('id', 'ID')</th>

@@ -19,13 +19,14 @@ class TaskController extends Controller
         $types=Type::all();
         $collumnName = $request->collumnname;
         $sortby = $request->sortby;
+        $type_sort=$request->type_sort;
 
         if(!$collumnName && !$sortby ) {
             $collumnName = 'id';
             $sortby = 'asc';
         }
         $task=Task::orderBy( $collumnName, $sortby)->paginate(15);
-        return view('task.index', ['tasks'=>$task, 'types'=>$types , 'collumnName' => $collumnName, 'sortby' => $sortby]);
+        return view('task.index', ['tasks'=>$task, 'types'=>$types , 'collumnName' => $collumnName, 'sortby' => $sortby, 'type_sort'=>$type_sort]);
     }
 
     /**

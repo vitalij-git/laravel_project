@@ -9,7 +9,9 @@
         </div>
         <div class="mb-3">
             <label  class="form-label">Description</label>
-            <input type="text" name="attendance_group_description" class="form-control" placeholder="Enter group description" value="{{$attendance_group->description}}" />
+            <textarea type="text" name="attendance_group_description" class="form-control summernote" placeholder="Enter group description"  >
+                {{$attendance_group->description}} </textarea>
+
         </div>
         <div class="mb-3">
             <label  class="form-label">Difficulty</label>
@@ -21,7 +23,12 @@
         </div>
         @csrf
         <button type="submit" class="btn btn-primary">Edit</button>
-        <a href="{{route('attendance_group.store')}}" class="btn btn-primary">Back</a>
+        <a href="{{route('attendance_group.index')}}" class="btn btn-primary">Back</a>
     </form>
+    <script>
+        $(document).ready(function() {
+         $('.summernote').summernote();
+        });
+    </script>
 </div>
 @endsection

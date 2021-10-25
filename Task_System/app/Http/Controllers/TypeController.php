@@ -84,4 +84,13 @@ class TypeController extends Controller
             $type->delete();
             return redirect()->route('type.index')->with('success_message', 'Tipas ištrintas sėkmingai');
     }
+    public function search(Request $request) {
+
+
+        $search = $request->search;
+
+        $type = Type::query()->sortable()->where('title', 'LIKE', "%{$search}%")->orWhere('description', 'LIKE', "%{$search}%")->paginate(5);
+
+        return view("type.search",['types'=> $type]);
+    }
 }

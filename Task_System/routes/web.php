@@ -29,6 +29,7 @@ Route::prefix('types')->group(function(){
     Route::post('update/{type}', 'TypeController@update')->name('type.update');
     Route::post('delete/{type}','TypeController@destroy')->name('type.destroy');
     Route::get('show/{type}', 'TypeController@show')->name('type.show');
+    Route::get('search', 'TypeController@search')->name('type.search');
 });
 
 Route::prefix('tasks')->group(function(){

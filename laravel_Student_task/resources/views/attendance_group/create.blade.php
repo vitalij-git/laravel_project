@@ -41,7 +41,7 @@
                     </div>
                     @csrf
                     <button type="submit" class="btn btn-primary">Create new </button>
-                    <a href="{{route('attendance_group.store')}}" class="btn btn-primary">Back</a>
+                    <a href="{{route('attendance_group.index')}}" class="btn btn-primary">Back</a>
                 </form>
             </div>
             <script>

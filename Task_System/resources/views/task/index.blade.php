@@ -51,6 +51,17 @@
     <button type="submit" class="btn btn-primary">SORT</button>
 
 </form>
+<form action="{{route('task.index')}}" method="GET">
+    <div class="col-md-6">
+        <select class="form-control" name="type_sort">
+           @foreach ($types as $type)
+           <option value="{{$type->id}}" >{{$type->title}}</option>
+           @endforeach
+       </select>
+       <button type="submit" class="btn btn-primary">Type sort</button>
+   </div>
+
+</form>
     <table class="table table-stripped">
             <tr>
                 <th>
