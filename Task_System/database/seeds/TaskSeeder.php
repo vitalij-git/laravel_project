@@ -14,7 +14,7 @@ class TaskSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        for($i=0;$i<10;$i++){
+        for($i=0;$i<150;$i++){
         DB::table('tasks')->insert([
             'title' => $faker->company(),
             'description' => $faker->paragraph(10),

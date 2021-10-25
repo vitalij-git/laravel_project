@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\PaginationSetting;
 use Carbon\Carbon;
 use App\task;
 use App\Type;
@@ -15,18 +17,33 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-
+        $pages = PaginationSetting::all()->sortBy("title",SORT_REGULAR, false);;
         $types=Type::all();
         $collumnName = $request->collumnname;
         $sortby = $request->sortby;
         $type_sort=$request->type_sort;
 
+        $pagination=$request->pagination;
+
         if(!$collumnName && !$sortby ) {
             $collumnName = 'id';
             $sortby = 'asc';
         }
-        $task=Task::orderBy( $collumnName, $sortby)->paginate(15);
-        return view('task.index', ['tasks'=>$task, 'types'=>$types , 'collumnName' => $collumnName, 'sortby' => $sortby, 'type_sort'=>$type_sort]);
+        if(!$pagination){
+            $pagination=30;
+        }
+
+        if($pagination == 1) {
+
+        $task=Task::orderBy( $collumnName, $sortby)->get();
+        } else {
+            $task=Task::orderBy( $collumnName, $sortby)->paginate($pagination);
+        }
+
+
+        // $task=Task::orderBy( $collumnName, $sortby)->paginate($pagination);
+        return view('task.index', ['tasks'=>$task, 'types'=>$types , 'collumnName' => $collumnName, 'sortby' => $sortby,
+         'type_sort'=>$type_sort, 'pages'=>$pages, "defaultLimit"=> $pagination]);
     }
 
     /**
@@ -80,7 +97,7 @@ class TaskController extends Controller
      */
     public function edit(task $task)
     {
-        $type =Type::all();
+        $type =Type::all()->sortBy("title",SORT_REGULAR, true);
         return view('task.edit', ['task'=>$task,'types'=>$type]);
     }
 

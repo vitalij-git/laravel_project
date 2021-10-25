@@ -36,7 +36,11 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $type =new Type;
+        $type->title = $request->type_title;
+        $type->description=$request->type_description;
+        $type->save();
+        return redirect()->route('type.index');
     }
 
     /**
@@ -70,7 +74,10 @@ class TypeController extends Controller
      */
     public function update(Request $request, type $type)
     {
-        //
+        $type->title = $request->type_title;
+        $type->description=$request->type_description;
+        $type->save();
+        return redirect()->route('type.index');
     }
 
     /**

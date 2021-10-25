@@ -42,3 +42,14 @@ Route::prefix('tasks')->group(function(){
     Route::get('show/{task}', 'TaskController@show')->name('task.show');
     Route::get('search', 'TaskController@search')->name('task.search');
 });
+Route::prefix('paginations')->group(function(){
+    Route::get('','PaginationSettingController@index')->name('paginationsetting.index');
+    Route::get('create', 'PaginationSettingController@create')->name('paginationsetting.create');
+    Route::post('store', 'PaginationSettingController@store')->name('paginationsetting.store');
+    Route::get('edit/{paginationsetting}', 'PaginationSettingController@edit')->name('paginationsetting.edit');
+    Route::post('update/{paginationsetting}', 'PaginationSettingController@update')->name('paginationsetting.update');
+    Route::post('delete/{paginationsetting}','PaginationSettingController@destroy')->name('paginationsetting.destroy');
+    Route::get('show/{paginationsetting}', 'PaginationSettingController@show')->name('paginationsetting.show');
+
+});
+

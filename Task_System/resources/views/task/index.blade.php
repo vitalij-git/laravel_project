@@ -7,61 +7,76 @@
             {{session()->get("error_message")}}
         </div>
  @endif
-<form action="{{route('task.search')}}" method="GET">
-    @csrf
-    <input type="text" name="search" placeholder="Enter search key" />
-    <button type="submit" class="btn btn-primary">Search</button>
-</form>
+<div class="top-action">
+    <form action="{{route('task.search')}}" method="GET">
+        @csrf
+            <label for="search" >Search data</label>
+            <input type="text" class="form-control-sm" name="search" id="search" placeholder="Enter search key" />
+            <button type="submit" class="btn btn-primary">Search</button>
+    </form>
 
-<form action="{{route('task.index')}}" method="GET">
-    @csrf
-    <select name="collumnname" class="form-select" aria-label=".form-select-lg example">
+    <form action="{{route('task.index')}}" method="GET">
+        @csrf
+        <select name="collumnname" class="form-control-sm" aria-label=".form-select-lg example">
 
-        @if ($collumnName == 'id')
-            <option value="id" selected>ID</option>
-        @else
-            <option value="id">ID</option>
-        @endif
+            @if ($collumnName == 'id')
+                <option value="id" selected>ID</option>
+            @else
+                <option value="id">ID</option>
+            @endif
 
 
-        @if ($collumnName == 'title')
-         <option value="title" selected>Title</option>
-        @else
-            <option value="title">Title</option>
-        @endif
+            @if ($collumnName == 'title')
+             <option value="title" selected>Title</option>
+            @else
+                <option value="title">Title</option>
+            @endif
 
-        @if ($collumnName == 'type_id')
-            <option value="type_id" selected>Type</option>
-        @else
-            <option value="type_id">Type</option>
-        @endif
+            @if ($collumnName == 'type_id')
+                <option value="type_id" selected>Type</option>
+            @else
+                <option value="type_id">Type</option>
+            @endif
 
-    </select>
+        </select>
 
-    <select name="sortby" class="form-select">
-        @if ($sortby == "asc")
-            <option value="asc" selected>ASC</option>
-            <option value="desc">DESC</option>
-        @else
-            <option value="asc">ASC</option>
-            <option value="desc" selected>DESC</option>
-        @endif
-    </select>
+        <select name="sortby" class="form-control-sm">
+            @if ($sortby == "asc")
+                <option value="asc" selected>ASC</option>
+                <option value="desc">DESC</option>
+            @else
+                <option value="asc">ASC</option>
+                <option value="desc" selected>DESC</option>
+            @endif
+        </select>
 
-    <button type="submit" class="btn btn-primary">SORT</button>
+        <button type="submit" class="btn btn-primary">SORT</button>
 
-</form>
-<form action="{{route('task.index')}}" method="GET">
-    <div class="col-md-6">
-        <select class="form-control" name="type_sort">
-           @foreach ($types as $type)
-           <option value="{{$type->id}}" >{{$type->title}}</option>
-           @endforeach
-       </select>
-       <button type="submit" class="btn btn-primary">Type sort</button>
-   </div>
+    </form>
+    <form action="{{route('task.index')}}" method="GET">
+            <select class="form-control-sm" name="type_sort">
+               @foreach ($types as $type)
+               <option value="{{$type->id}}" >{{$type->title}}</option>
+               @endforeach
+           </select>
+           <button type="submit" class="btn btn-primary">Type sort</button>
+    </form>
+    <form action="{{route('task.index')}}" method="GET">
+        @csrf
 
-</form>
+            <label for="">Show tasks in page</label>
+            <select name="pagination" class="form-control-sm">
+                @foreach ($pages as $page)
+                    @if($page->visible==1)
+                    <option value="{{$page->value}}"  @if($defaultLimit == $page->value) selected @endif>{{$page->title}}</option>
+                    @endif
+                @endforeach
+            </select>
+                <button type="submit" class="btn btn-primary">Set</button>
+
+
+    </form>
+</div>
     <table class="table table-stripped">
             <tr>
                 <th>
@@ -118,5 +133,7 @@
                     </tr>
             @endforeach
     </table>
-    {!! $tasks->appends(Request::except('page'))->render() !!}
+    @if ($defaultLimit !=1 )
+        {!! $tasks->appends(Request::except('page'))->render() !!}
+    @endif
 @endsection
