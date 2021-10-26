@@ -56,10 +56,10 @@
     <form action="{{route('task.index')}}" method="GET">
             <select class="form-control-sm" name="type_sort">
                @foreach ($types as $type)
-               <option value="{{$type->id}}" >{{$type->title}}</option>
+               <option value="{{$type->title}}" >{{$type->title}}</option>
                @endforeach
            </select>
-           <button type="submit" class="btn btn-primary">Type sort</button>
+           <button type="submit" class="btn btn-primary" name="typeSort">Type sort</button>
     </form>
     <form action="{{route('task.index')}}" method="GET">
         @csrf

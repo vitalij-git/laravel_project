@@ -1,0 +1,11 @@
+
+.top-action{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.top-action form{
+    margin: 7px;
+}
+button{
+    margin: 5px;
+}

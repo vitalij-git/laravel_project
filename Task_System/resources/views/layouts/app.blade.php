@@ -19,6 +19,7 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main_style.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -61,6 +62,16 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('task.index') }}">
+                                        {{ __('Tasks') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('type.index') }}">
+                                        {{ __('Types') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('paginationsetting.index') }}">
+                                        {{ __('Pages') }}
+                                    </a>
+
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
