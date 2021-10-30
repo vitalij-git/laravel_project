@@ -86,6 +86,9 @@
                     {{_('title')}}
                 </th>
                 <th>
+                    {{_('Owner')}}
+                </th>
+                <th>
                     {{_('Type')}}
                 </th>
                 <th>
@@ -113,6 +116,10 @@
                             {{$task->title}}
                         </td>
                         <td>
+                            {{$task->ownerTask->name}}
+                            {{$task->ownerTask->surname}}
+                        </td>
+                        <td>
                             {{$task->typeTask->title}}
                         </td>
                         <td>
@@ -122,13 +129,13 @@
                             {{$task->end_date}}
                         </td>
                         <td>
-                            <a href="{{route('task.edit',[$task])}}" class="btn btn-primary">Edit</a>
+                            <a href="{{route('task.edit',[$task])}}" class="btn btn-primary">{{_('Edit')}}</a>
                         </td>
                         <td>
-                            <a href="{{route('task.show',[$task])}}" class="btn btn-primary">Show</a>
+                            <a href="{{route('task.show',[$task])}}" class="btn btn-primary"> {{_('Show')}}</a>
                         </td>
                         <td>
-                            <a href="{{route('task.destroy',[$task])}}" class="btn btn-danger">Delete</a>
+                            <a href="{{route('task.destroy',[$task])}}" class="btn btn-danger">{{_('Delete')}}</a>
                         </td>
                     </tr>
             @endforeach

@@ -37,6 +37,11 @@ class PaginationSettingController extends Controller
     public function store(Request $request)
     {
         $pagination =new PaginationSetting;
+        $request->validate([
+            'pagination_title'=>'required|between:6,225|regex:/^[a-zA-Z]+$/u',
+            'pagination_value'=>'required|integer'
+
+        ]);
         $pagination->title=$request->pagination_title;
         $pagination->value=$request->pagination_value;
         if($request->pagination_visible=="on"){

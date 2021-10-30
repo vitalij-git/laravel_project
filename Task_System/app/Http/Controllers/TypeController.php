@@ -37,6 +37,11 @@ class TypeController extends Controller
     public function store(Request $request)
     {
         $type =new Type;
+        $request->validate([
+            'type_title'=>'required|between:6,225|regex:/^[a-zA-Z]+$/u',
+            'type_description'=>'required|max:1500'
+
+        ]);
         $type->title = $request->type_title;
         $type->description=$request->type_description;
         $type->save();

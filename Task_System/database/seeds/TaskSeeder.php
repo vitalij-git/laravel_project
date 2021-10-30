@@ -19,6 +19,7 @@ class TaskSeeder extends Seeder
             'title' => $faker->company(),
             'description' => $faker->paragraph(10),
             'type_id'=>rand(1,4),
+            'owner_id'=>rand(1,15),
             'start_date'=>Carbon::now(),
             'end_date'=>Carbon::tomorrow()
         ]);

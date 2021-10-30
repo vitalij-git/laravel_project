@@ -71,6 +71,9 @@
                                     <a class="dropdown-item" href="{{ route('paginationsetting.index') }}">
                                         {{ __('Pages') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('owner.index') }}">
+                                        {{ __('Owner') }}
+                                    </a>
 
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

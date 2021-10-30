@@ -20,4 +20,8 @@ class task extends Model
     {
         return $this->belongsTo(Type::class, 'type_id', 'id');
     }
+    public function ownerTask()
+    {
+        return $this->belongsTo(Owner::class, 'owner_id', 'id');
+    }
 }
