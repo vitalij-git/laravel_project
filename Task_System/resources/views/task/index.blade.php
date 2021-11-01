@@ -54,12 +54,13 @@
 
     </form>
     <form action="{{route('task.index')}}" method="GET">
-            <select class="form-control-sm" name="type_sort">
+        @csrf
+        <select class="form-control-sm" name="type_filter">
                @foreach ($types as $type)
-               <option value="{{$type->title}}" >{{$type->title}}</option>
+               <option value="{{$type->id}}" >{{$type->title}}</option>
                @endforeach
            </select>
-           <button type="submit" class="btn btn-primary" name="typeSort">Type sort</button>
+           <button type="submit" class="btn btn-primary" >Type filter</button>
     </form>
     <form action="{{route('task.index')}}" method="GET">
         @csrf
@@ -73,8 +74,6 @@
                 @endforeach
             </select>
                 <button type="submit" class="btn btn-primary">Set</button>
-
-
     </form>
 </div>
 <a class="btn btn-primary" href="{{route('task.pdf')}}"> Export tasks table to PDF </a>

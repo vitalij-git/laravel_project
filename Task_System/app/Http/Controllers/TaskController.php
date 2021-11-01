@@ -40,10 +40,11 @@ class TaskController extends Controller
 
         $task=Task::orderBy( $collumnName, $sortby)->get();
         }
-        else if(isset($_GET['typeSort'])){
+        else if($request->type_filter){
 
-            $type_sort = $request->type_sort;
-            $task= Type::query()->sortable()->where('title', 'LIKE', "%{$type_sort}%")->paginate(5);
+            $type_filter = $request->type_filter;
+
+             $task= Task::query()->sortable()->where('type_id', $type_filter)->paginate($pagination);
         }
          else {
             $task=Task::orderBy( $collumnName, $sortby)->paginate($pagination);
@@ -162,15 +163,6 @@ class TaskController extends Controller
         $task = Task::query()->sortable()->where('title', 'LIKE', "%{$search}%")->orWhere('description', 'LIKE', "%{$search}%")->paginate(5);
 
         return view("task.search",['tasks'=> $task]);
-    }
-    public function typeSort(Request $request) {
-
-
-        $type_sort = $request->type_sort;
-
-        $task= Type::query()->sortable()->where('title', 'LIKE', "%{$type_sort}%")->paginate(5);
-
-        return view("task.index",['tasks'=> $task]);
     }
     public function generatePDF() {
 
