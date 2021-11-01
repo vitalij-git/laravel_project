@@ -41,7 +41,9 @@ Route::prefix('tasks')->group(function(){
     Route::post('delete/{task}','TaskController@destroy')->name('task.destroy')->middleware("auth");
     Route::get('show/{task}', 'TaskController@show')->name('task.show')->middleware("auth");
     Route::get('search', 'TaskController@search')->name('task.search')->middleware("auth");
-
+    Route::get('/pdf', 'TaskController@generatePDF')->name('task.pdf');
+    Route::get('pdftask/{task}', 'TaskController@generateTaskPDF')->name('task.pdftask');
+    Route::get('pdfstatistics','TaskController@generateStatisticsPDF')->name('task.statistics');
 });
 Route::prefix('paginations')->group(function(){
     Route::get('','PaginationSettingController@index')->name('paginationsetting.index')->middleware("auth");
@@ -61,6 +63,7 @@ Route::prefix('owners')->group(function(){
     Route::get('edit/{owner}', 'OwnerController@edit')->name('owner.edit')->middleware("auth");
     Route::post('update/{owner}', 'OwnerController@update')->name('owner.update')->middleware("auth");
     Route::get('delete/{owner}','OwnerController@destroy')->name('owner.destroy')->middleware("auth");
-
+    Route::get('/pdf', 'OwnerController@generatePDF')->name('owner.pdf');
+    Route::get('pdfowner/{owner}', 'OwnerController@generateOwnerPDF')->name('owner.pdfowner');
 });
 

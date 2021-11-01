@@ -77,7 +77,11 @@
 
     </form>
 </div>
-    <table class="table table-stripped">
+<a class="btn btn-primary" href="{{route('task.pdf')}}"> Export tasks table to PDF </a>
+<form action="{{route('task.statistics')}}" method="GET">
+    <button type="submit" class="btn btn-secondary">Export statistics to PDF</button>
+</form>
+<table class="table table-stripped">
             <tr>
                 <th>
                     {{_('ID')}}

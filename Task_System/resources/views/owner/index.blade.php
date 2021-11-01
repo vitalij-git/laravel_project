@@ -7,6 +7,7 @@
             {{session()->get("error_message")}}
         </div>
  @endif
+ <a class="btn btn-primary" href="{{route('owner.pdf')}}"> Export tasks table to PDF </a>
     <table class="table table-stripped">
             <tr>
                 <th>
@@ -29,6 +30,9 @@
                 </th>
                 <th>
                     {{_('Delete')}}
+                </th>
+                <th>
+                    {{_('PDF')}}
                 </th>
             </tr>
             @foreach ($owners as $owner)
@@ -54,7 +58,12 @@
                         <td>
                             <a href="{{route('owner.destroy',[$owner])}}" class="btn btn-danger">{{_('Delete')}}</a>
                         </td>
+                        <td>
+                        <a href="{{route('owner.pdfowner', [$owner])}}" class="btn btn-primary">Export owner PDF</a>
+                    </td>
                     </tr>
             @endforeach
     </table>
+
+
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Owner;
 use Illuminate\Http\Request;
+use PDF;
 
 class OwnerController extends Controller
 {
@@ -102,5 +103,25 @@ class OwnerController extends Controller
     {
         $owner->delete();
         return redirect()->route('owner.index');
+    }
+    public function generatePDF() {
+
+
+        $owner = Owner::all();
+
+        view()->share('owners', $owner);
+
+        $pdf = PDF::loadView("owner.pdf_template", $owner);
+
+        return $pdf->download("owner.pdf");
+    }
+    public function generateOwnerPDF(Owner $owner) {
+
+
+        view()->share('owner', $owner);
+
+        $pdf = PDF::loadView("owner.pdf_task_template", $owner);
+
+        return $pdf->download("task".$owner->id.".pdf");
     }
 }
