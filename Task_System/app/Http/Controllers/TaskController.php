@@ -47,7 +47,7 @@ class TaskController extends Controller
              $task= Task::query()->sortable()->where('type_id', $type_filter)->paginate($pagination);
         }
          else {
-            $task=Task::orderBy( $collumnName, $sortby)->paginate($pagination);
+            $task= Task::orderBy( $collumnName, $sortby)->paginate($pagination);
         }
 
 
