@@ -10,13 +10,16 @@
     <table class="table table-stripped">
             <tr>
                 <th>
-                    {{_('ID')}}
+                    @sortablelink('id','ID')
+                    {{-- {{_('ID')}} --}}
                 </th>
                 <th>
-                    {{_('Name')}}
+                    @sortablelink('name','Name')
+                    {{-- {{_('Name')}} --}}
                 </th>
                 <th>
-                    {{_('Surname')}}
+                    @sortablelink('surname','Surname')
+                    {{-- {{_('Surname')}} --}}
                 </th>
                 <th>
                     {{_('Edit')}}

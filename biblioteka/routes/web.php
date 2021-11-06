@@ -38,4 +38,5 @@ Route::prefix('books')->group(function(){
     Route::post('update/{book}', 'BookController@update')->name('book.update')->middleware("auth");
     Route::get('delete/{book}','BookController@destroy')->name('book.destroy')->middleware("auth");
     Route::get('show/{book}','BookController@show')->name('book.show')->middleware("auth");
+    Route::get('generateStatistics', 'BookController@generateStatisticsPDF')->name('book.statistics')->middleware("auth");
 });

@@ -12,13 +12,14 @@ class BookSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        for($i=0;$i<100;$i++)
-       DB::table('books')->insert([
-            'title'=>$faker->company(),
-            'isbn'=>$faker->isbn13(),
-            'about'=>$faker->text(),
-            'pages'=>$faker->randomNumber(2, true),
-            'author_id'=>rand(1,10)
-       ]);
+        // for($i=0;$i<100;$i++){
+            DB::table('books')->insert([
+                    'title'=>$faker->company(),
+                    'isbn'=>$faker->isbn13(),
+                    'about'=>$faker->text(),
+                    'pages'=>rand(1, 99),
+                    'author_id'=>rand(1,10)
+            ]);
+        // }
     }
 }

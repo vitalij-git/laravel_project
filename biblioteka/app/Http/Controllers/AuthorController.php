@@ -15,7 +15,9 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors=Author::all();
+
+        $authors=Author::sortable()->paginate(10);
+
         return view("author.index", ["authors"=>$authors]);
     }
 
@@ -89,7 +91,13 @@ class AuthorController extends Controller
      */
     public function destroy(author $author)
     {
-        $author->delete();
-        return redirect()->route("author.index");
+        $author_count=$author->authorBooks->count();
+
+        if($author_count==0){
+            $author->delete();
+            return redirect()->route("author.index")->with('success_message', 'autorius ištrinta sėkmingai');
+        }
+        return redirect()->route("author.index")->with('error_message', 'autorius turi knygu');
     }
+
 }

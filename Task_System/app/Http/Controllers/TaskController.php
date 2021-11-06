@@ -24,7 +24,7 @@ class TaskController extends Controller
         $owner=Owner::all();
         $collumnName = $request->collumnname;
         $sortby = $request->sortby;
-        $type_sort=$request->type_sort;
+
 
         $pagination=$request->pagination;
 

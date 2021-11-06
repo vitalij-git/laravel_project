@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\book;
 use Illuminate\Http\Request;
 use App\Author;
-
+use PDF;
 class BookController extends Controller
 {
     /**
@@ -15,24 +15,21 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-       $books =Book::all();
+        $filterBooks = Book::all();
        $authors=Author::all();
-       $collumnName = $request->collumnname;
-       $sortby = $request->sortby;
-       if(!$collumnName && !$sortby ) {
-           $collumnName = 'id';
-           $sortby = 'asc';
+       $bookTitleFilter = $request->bookTitleFilter;
+       $bookAuthorFilter =$request->bookAuthorFilter;
+       if($bookAuthorFilter){
+        $books= Book::query()->sortable()->where('author_id', $bookAuthorFilter)->paginate(5);
        }
-       if($request->author_filter){
-        $author_filter = $request->author_filter;
-        echo $author_filter;
-        $books= Book::query()->sortable()->where('author_id', $author_filter)->paginate(5);
+       else if($bookTitleFilter){
+        $books= Book::sortable()->where('title', $bookTitleFilter)->paginate(5);
        }else{
-        $books= Book::orderBy( $collumnName, $sortby)->paginate(10);
+        $books= Book::sortable()->paginate(10);
        }
 
 
-       return view("book.index", ["books"=>$books, "collumnName"=> $collumnName, "sortby"=>$sortby, "authors"=>$authors]);
+       return view("book.index", ["books"=>$books,  "authors"=>$authors, "filterBooks" => $filterBooks]);
     }
 
     /**
@@ -115,5 +112,17 @@ class BookController extends Controller
     {
         $book->delete();
         return redirect()->route("book.index");
+    }
+
+   public function generateStatisticsPDF()
+    {
+        $books = Book::all();
+        $authors = Author::all();
+
+        $booksCount=$books->count();
+        $authorsCount=$authors->count();
+        view()->share(['booksCount'=> $booksCount,'authorsCount'=>$authorsCount]);
+        $pdf = PDF::loadView("book.statistics");
+        return $pdf->download("statistics.pdf");
     }
 }
