@@ -23,7 +23,7 @@
             <div class="col-md-6">
                  <select class="form-control @error('book_author_id') is-invalid @enderror"  name="book_author_id">
                     @foreach ($authors as $author)
-                    <option value="{{$author->id}}" @if($book->id == $book->author_id) selected @endif>{{$author->name}}{{$author->surname}}</option>
+                    <option value="{{$author->id}}" @if($author->id == $book->author_id) selected @endif>{{$author->name}}{{$author->surname}}</option>
                     @endforeach
                 </select>
             </div>
