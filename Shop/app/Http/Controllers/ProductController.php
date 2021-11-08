@@ -12,9 +12,30 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Request $request)
     {
-        $products=Product::sortable()->paginate(10);
+
+        $category=$request->product_category;
+        $min_price=$request->product_min_price;
+        $max_price=$request->product_max_price;
+        if($category && $min_price && $max_price)
+        {
+
+            $products=Product::sortable()->where('category_id',  $category )->whereBetween('price', [$min_price, $max_price])->paginate(10);
+        }
+        else if(!$category && $min_price && $max_price)
+        {
+
+            $products=Product::sortable()->whereBetween('price', [$min_price, $max_price])->paginate(10);
+        }
+        else if($category && !$min_price && !$max_price)
+        {
+
+            $products=Product::sortable()->where('category_id',  $category )->paginate(30);
+        }
+        else{
+            $products=Product::sortable()->paginate(50);
+        }
         $categories=Category::all();
         return view('product.index', ['products'=>$products, 'categories'=>$categories]);
     }
@@ -39,7 +60,14 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product =new Product;
-
+        $request->validate([
+            'product_title'=>'required|between:6,225|regex:/^[a-zA-Z]+$/u',
+            'product_description'=>'required|max:1500',
+            'product_excerpt' => 'required|max:600',
+            'product_price' => 'required|numeric',
+            'product_category_id'=>'required|integer',
+            'product_iamge'=>'file|max:2048'
+        ]);
         $product->title=$request->product_title;
         $product->description=$request->product_description;
         $product->excerpt=$request->product_excerpt;
@@ -93,6 +121,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $request->validate([
+            'product_title'=>'required|between:6,225|regex:/^[a-zA-Z]+$/u',
+            'product_description'=>'required|max:1500',
+            'product_excerpt' => 'required|max:600',
+            'product_price' => 'required|numeric|regex:^(?:[1-9]\d+|\d)(?:\,\d\d)?$',
+            'product_category_id'=>'required|integer',
+            'product_iamge'=>'file|max:2048'
+        ]);
         $product->title=$request->product_title;
         $product->description=$request->product_description;
         $product->excerpt=$request->product_excerpt;

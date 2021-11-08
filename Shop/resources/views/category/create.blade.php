@@ -28,7 +28,7 @@
                             <label for="category_description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="category_description" type="text" class="form-control summernote @error('category_description') is-invalid @enderror" name="category_descripton"  required  autofocus>
+                                <textarea id="category_description" type="text" class="form-control summernote @error('category_description') is-invalid @enderror" name="category_description"  required  autofocus>
                                     {{ old('category_description') }}
                                 </textarea>
                                 @error('category_description')

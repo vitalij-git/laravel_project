@@ -28,7 +28,7 @@
                             <label for="shop_description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="shop_description" type="text" class="form-control summernote @error('shop_description') is-invalid @enderror" name="shop_descripton"  required  autofocus>
+                                <textarea id="shop_description" type="text" class="form-control summernote @error('shop_description') is-invalid @enderror" name="shop_description"  required  autofocus>
                                     {{ old('shop_description') }}
                                 </textarea>
                                 @error('shop_description')
@@ -92,7 +92,13 @@
 </div>
 <script>
     $(document).ready(function() {
-     $('.summernote').summernote();
+     $('.summernote').summernote({
+         popover: {
+             image:[],
+             link:[],
+             air:[]
+         }
+     });
     });
 </script>
 @endsection

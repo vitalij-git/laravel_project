@@ -85,7 +85,7 @@
                             <label for="product_image" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
 
                             <div class="col-md-6">
-                                <input id="product_image" type="file" class="form-control @error('product_image') is-invalid @enderror" name="product_image" required  autofocus>
+                                <input id="product_image" type="file" class="form-control @error('product_image') is-invalid @enderror" name="product_image" >
 
                                 @error('product_mage')
                                     <span class="invalid-feedback" role="alert">

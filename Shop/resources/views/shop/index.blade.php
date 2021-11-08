@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+
     <a href="{{route('shop.create')}}" class="btn btn-primary">{{_('Create shop')}}</a>
     <table class="table table-striped">
 
@@ -25,7 +25,6 @@
                 <td> {{$shop->country}} </td>
                 <td>
                     <a href="{{route('shop.edit',[$shop])}}" class="btn btn-secondary">{{_('Edit')}}</a>
-                    <a href="{{route('shop.show',[$shop])}}" class="btn btn-primary">{{_('Show')}}</a>
                     <form method="post" action="{{route('category.destroy', [$shop])}}">
                         @csrf
                         <button class="btn btn-danger" type="submit">{{_('Delete')}}</button>
@@ -35,8 +34,7 @@
         @endforeach
     </table>
 
-    {!! $categories->appends(Request::except('page'))->render() !!}
-</div>
+
 
 
 @endsection

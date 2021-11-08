@@ -37,7 +37,13 @@ class ShopController extends Controller
     public function store(Request $request)
     {
         $shop= new Shop;
-
+        $request->validate([
+            'shop_title'=>'required|between:6,225|regex:/^[a-zA-Z]+$/u',
+            'shop_description'=>'required|max:1500',
+            'shop_email'=>'required|email:rfc,dns',
+            'shop_phone'=>'required|digits_between:9,9',
+            'shop_country'=>'required|regex:/^[a-zA-Z]+$/u',
+        ]);
         $shop->title=$request->shop_title;
         $shop->description=$request->shop_description;
         $shop->email=$request->shop_email;
@@ -79,7 +85,13 @@ class ShopController extends Controller
      */
     public function update(Request $request, Shop $shop)
     {
-
+        $request->validate([
+            'shop_title'=>'required|between:6,225|regex:/^[a-zA-Z]+$/u',
+            'shop_description'=>'required|max:1500',
+            'shop_email'=>'required|email',
+            'shop_phone'=>'required|digits_between:9,9',
+            'shop_country'=>'required|regex:/^[a-zA-Z]+$/u',
+        ]);
         $shop->title=$request->shop_title;
         $shop->description=$request->shop_description;
         $shop->email=$request->shop_email;
