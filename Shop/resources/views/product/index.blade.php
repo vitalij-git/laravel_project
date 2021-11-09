@@ -13,8 +13,9 @@
                 <div class="col-md-3">
                     <select class="form-control"  name="product_category">
                         @foreach ($categories as $category)
-                        <option value="{{$category->id}}" >{{$category->title}}</option>
+                        <option value="{{$category->id}}">{{$category->title}}</option>
                         @endforeach
+                        <option value="">All</option>
                     </select>
                 </div>
             </div>
@@ -31,8 +32,13 @@
                 </div>
             </div>
             <button class="btn btn-primary btn-filter">Filter</button>
-
         </form>
+        @if($readyPDF==1)
+        <form action="{{route('product.index')}}" method="GET">
+            @csrf
+            <button class="btn btn-primary btn-filter" name="generatePDF">Download PDF</button>
+        </form>
+        @endif
     <table class="table table-striped">
 
         <tr>

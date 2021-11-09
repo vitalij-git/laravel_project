@@ -29,6 +29,7 @@ Route::prefix('products')->group(function(){
     Route::post('update/{product}', 'ProductController@update')->name('product.update')->middleware("auth");
     Route::post('delete/{product}','ProductController@destroy')->name('product.destroy')->middleware("auth");
     Route::get('show/{product}','ProductController@show')->name('product.show')->middleware("auth");
+    Route::post('pdf', 'ProductController@generatePDF')->name('productpdf');
 });
 Route::prefix('categories')->group(function(){
     Route::get('','CategoryController@index')->name('category.index')->middleware("auth");

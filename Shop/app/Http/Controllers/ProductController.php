@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Category;
+use PDF;
 class ProductController extends Controller
 {
     /**
@@ -18,26 +19,35 @@ class ProductController extends Controller
         $category=$request->product_category;
         $min_price=$request->product_min_price;
         $max_price=$request->product_max_price;
+        $readyPDF=0;
         if($category && $min_price && $max_price)
         {
 
             $products=Product::sortable()->where('category_id',  $category )->whereBetween('price', [$min_price, $max_price])->paginate(10);
+            $readyPDF=1;
         }
         else if(!$category && $min_price && $max_price)
         {
 
-            $products=Product::sortable()->whereBetween('price', [$min_price, $max_price])->paginate(10);
+            $products=Product::sortable()->whereBetween('price', [$min_price, $max_price])->paginate(20);
+            $readyPDF=1;
         }
         else if($category && !$min_price && !$max_price)
         {
 
             $products=Product::sortable()->where('category_id',  $category )->paginate(30);
+            $readyPDF=1;
         }
         else{
             $products=Product::sortable()->paginate(50);
         }
+        if($request->generatePDF){
+            // view()->share(['products'=>$products]);
+            $pdf = PDF::loadView("product.filepdf.pdf");
+            return $pdf->download("products.pdf");
+        }
         $categories=Category::all();
-        return view('product.index', ['products'=>$products, 'categories'=>$categories]);
+        return view('product.index', ['products'=>$products, 'categories'=>$categories, 'readyPDF'=>$readyPDF]);
     }
 
     /**
@@ -160,5 +170,18 @@ class ProductController extends Controller
     {
         $product->delete();
         return redirect()->route('product.index')->with("success_message", "Produktas sėkmingai ištrintas");
+    }
+    public function generatePDF() {
+
+       //Product::index()->$products;
+       //Product::all()->index()->$products;
+       //index();
+
+         $products = Product::all();
+
+        view()->share('products',$products);
+        $pdf = PDF::loadView("filepdf", $products);
+
+        return $pdf->download("products.pdf");
     }
 }
