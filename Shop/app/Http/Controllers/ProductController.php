@@ -41,11 +41,11 @@ class ProductController extends Controller
         else{
             $products=Product::sortable()->paginate(50);
         }
-        if($request->generatePDF){
-            // view()->share(['products'=>$products]);
-            $pdf = PDF::loadView("product.filepdf.pdf");
-            return $pdf->download("products.pdf");
-        }
+        // if($request->generatePDF){
+        //     // view()->share(['products'=>$products]);
+        //     $pdf = PDF::loadView("product.filepdf");
+        //     return $pdf->download("products.pdf");
+        // }
         $categories=Category::all();
         return view('product.index', ['products'=>$products, 'categories'=>$categories, 'readyPDF'=>$readyPDF]);
     }
@@ -180,7 +180,7 @@ class ProductController extends Controller
          $products = Product::all();
 
         view()->share('products',$products);
-        $pdf = PDF::loadView("filepdf", $products);
+        $pdf = PDF::loadView("product.filepdf");
 
         return $pdf->download("products.pdf");
     }

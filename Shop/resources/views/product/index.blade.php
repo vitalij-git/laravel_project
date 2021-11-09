@@ -34,7 +34,7 @@
             <button class="btn btn-primary btn-filter">Filter</button>
         </form>
         @if($readyPDF==1)
-        <form action="{{route('product.index')}}" method="GET">
+        <form action="{{route('productpdf')}}" method="POST">
             @csrf
             <button class="btn btn-primary btn-filter" name="generatePDF">Download PDF</button>
         </form>
