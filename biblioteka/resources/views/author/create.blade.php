@@ -10,7 +10,7 @@
           <div class="mb-3">
             <label for="author_surname" class="form-label">{{_('Surname')}}</label>
             <input type="text" class="form-control @error('author_surname') is-invalid @enderror "  name="author_surname" placeholder="">
-
+          </div>
         @csrf
           <button type="submit" class="btn btn-primary">{{_('Create')}}</button>
           <a href="{{route('author.index')}}" class="btn btn-secondary">{{_('Back')}}</a>
