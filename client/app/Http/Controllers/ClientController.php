@@ -62,16 +62,34 @@ class ClientController extends Controller
             $client->save();
             return redirect()->route('client.index');
         }
-        else{
-            $clientCount= count($request->client_name);
+        else if($request->AddClients==2){
+            $clientCount= count($request->clientName);
             for ($i = 0; $i<$clientCount; $i++ ) {
                 $client = new Client;
-                $client->name=$request->client_name;
-                $client->surname=$request->client_surname;
-                $client->description=$request->client_description;
+                $client->name=$request->clientName[$i]['name'];
+                $client->surname=$request->clientSurname[$i]['surname'];
+                $client->description=$request->clientDescription[$i]['description'];
                 $client->save();
-                return redirect()->route('client.index');
             }
+            return redirect()->route('client.index');
+        }
+        else {
+                $client = new Client;
+                $client->name=$request->clientName;
+                $client->surname=$request->clientSurname;
+                $client->description=$request->clientDescription;
+                $client->save();
+
+                $success =[
+                    'success'=> 'Client added successfully',
+                    'clientID'=>$client->id,
+                    'clientName'=>$client->name,
+                    'clientSurname'=>$client->surname,
+                    'clientDescription'=>$client->description,
+                ];
+                $success_json=response()->json($success);
+
+                return $success_json;
         }
     }
 
@@ -117,6 +135,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+        return "deleted";
     }
 }

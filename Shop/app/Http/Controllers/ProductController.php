@@ -47,7 +47,8 @@ class ProductController extends Controller
         //     return $pdf->download("products.pdf");
         // }
         $categories=Category::all();
-        return view('product.index', ['products'=>$products, 'categories'=>$categories, 'readyPDF'=>$readyPDF]);
+        return view('product.index', ['products'=>$products, 'categories'=>$categories, 'readyPDF'=>$readyPDF,
+         'filterCategory'=> $category, 'filter_min_price'=>$min_price,'filter_max_price'=>$max_price ]);
     }
 
     /**
@@ -156,8 +157,20 @@ class ProductController extends Controller
         }
         $product->category_id=$request->product_category_id;
         $product->save();
+        $success =[
+            'success'=> 'product added successfully',
+            'productID'=>$product->id,
+            'product_title'=>$product->title,
+            'product_excerpt'=>$product->excerpt,
+            'product_description'=>$product->description,
+            'product_category_id'=>$product->category_id,
+            'product_price'=>$product->price,
 
-        return redirect()->route('product.index');
+
+        ];
+        $success_json=response()->json($success);
+
+        return $success_json;
     }
 
     /**
@@ -171,17 +184,28 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('product.index')->with("success_message", "Produktas sėkmingai ištrintas");
     }
-    public function generatePDF() {
+    public function generatePDF(Request $request) {
 
        //Product::index()->$products;
        //Product::all()->index()->$products;
        //index();
+        $category = $request->product_category;
+        $min_price=$request->product_min_price;
+        $max_price=$request->product_max_price;
+        if($category && $min_price && $max_price){
+            $products=Product::where('category_id',  $category )->whereBetween('price', [$min_price, $max_price])->get();
+        }
+        else if(!$category && $min_price && $max_price ){
+            $products=Product::whereBetween('price', [$min_price, $max_price])->get();
+        }
 
-         $products = Product::all();
+        //   $products = Product::limit(10)->get();
 
-        view()->share('products',$products);
-        $pdf = PDF::loadView("product.filepdf");
+        // $products = Product::all();
 
-        return $pdf->download("products.pdf");
+        view()->share('products', $products);
+        $pdf = PDF::loadView("pdf_template", $products);
+
+        return $pdf->download("donwload.pdf");
     }
 }

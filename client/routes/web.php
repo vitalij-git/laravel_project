@@ -27,4 +27,5 @@ Route::get('createclient', 'ClientController@create')->name('client.createclient
 Route::get('createclients', 'ClientController@createClients')->name('client.createclients');
 Route::get('createjs', 'ClientController@createWithJS')->name('client.createclientjs');
 Route::post('store', 'ClientController@store')->name('client.store');
+Route::post('destroy', 'ClientController@destroy')->name('client.destroy');
 });

@@ -50,8 +50,18 @@ class CategoryController extends Controller
         $category->description=$request->category_description;
         $category->shop_id=$request->category_shop_id;
         $category->save();
+        $success =[
+            'success'=> 'category added successfully',
+            'categoryID'=>$category->id,
+            'category_title'=>$category->title,
+            'category_shop_id'=>$category->shop_id,
+            'category_description'=>$category->description,
 
-        return redirect()->route('category.index');
+
+        ];
+        $success_json=response()->json($success);
+
+        return $success_json;
     }
 
     /**
@@ -115,10 +125,10 @@ class CategoryController extends Controller
         if($categoryCount == 0) {
             $category->delete();
         } else {
-            return redirect()->route('shop.index')->with("error_message", "Kategorija turi produktų ");
+            return redirect()->route('category.index')->with("error_message", "Kategorija turi produktų ");
         }
 
-        return redirect()->route('shop.index')->with("success_message", "Kategorija sėkmingai ištrinta");
+        return redirect()->route('category.index')->with("success_message", "Kategorija sėkmingai ištrinta");
     }
 
 }

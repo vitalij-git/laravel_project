@@ -51,7 +51,21 @@ class ShopController extends Controller
         $shop->country=$request->shop_country;
 
         $shop->save();
-        return redirect()->route('shop.index');
+        $success =[
+            'success'=> 'shop added successfully',
+            'shopID'=>$shop->id,
+            'shop_title'=>$shop->title,
+            'shop_email'=>$shop->email,
+            'shop_description'=>$shop->description,
+            'shop_phone'=>$shop->phone,
+            'shop_country'=>$shop->country,
+
+
+        ];
+        $success_json=response()->json($success);
+
+        return $success_json;
+
     }
 
     /**

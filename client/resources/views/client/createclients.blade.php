@@ -17,15 +17,16 @@
     @for ($i=0;$i<$clientsCount;$i++)
         <div class="client">
             <label for="client_name" class="form-label">{{_('Name')}}</label>
-            <input type="text" class="form-control " name="client_name[][name]" >
+            <input type="text" class="form-control " name="clientName[][name]" >
             <label for="client_surname" class="form-label">{{_('Surname')}}</label>
-            <input type="text" class="form-control "  name="client_surname[][surname]">
+            <input type="text" class="form-control "  name="clientSurname[][surname]">
             <label for="client_description" class="form-label">{{_('Description')}}</label>
-            <textarea type="text" class="form-control summernote"  name="client_description[][description]" ></textarea>
+            <textarea type="text" class="form-control summernote"  name="clientDescription[][description]" ></textarea>
         </div>
       @endfor
 
-      <button type="submit" name="AddClients" class="btn btn-primary">Add</button>
+      <button type="submit" name="AddClients"  value="2" class="btn btn-primary">Add</button>
+      <a href="{{route('client.index')}}" class="btn btn-secondary">{{ __('back') }}</a>
 
 
 </form>
