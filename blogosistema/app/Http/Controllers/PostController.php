@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Category;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,7 +15,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts= Post::sortable()->paginate(10);
+
+        return view('post.index', ['posts'=>$posts]);
     }
 
     /**
@@ -24,7 +27,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $categories=Category::all();
+        return view('post.create', ['categories'=>$categories]);
     }
 
     /**
@@ -35,7 +39,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post =new Post;
+        $post->title=$request->post_title;
+        $post->description=$request->post_description;
+        $post->content=$request->post_content;
+        $post->category_id=$request->post_category_id;
+        $post->image=$request->post_iamge;
+
+
+        $post->save();
+
+        return redirect()->route('post.index');
     }
 
     /**
@@ -46,7 +60,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        $categories=Category::all();
+        return view('post.show', ['post'=>$post, 'categories'=>$categories]);
     }
 
     /**
@@ -57,7 +72,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories=Category::all();
+        return view('post.edit', ['post'=>$post, 'categories'=>$categories]);
     }
 
     /**
@@ -69,7 +85,17 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post->title=$request->post_title;
+        $post->description=$request->post_description;
+        $post->content=$request->post_content;
+        $post->category_id=$request->post_category_id;
+        $post->image=$request->post_iamge;
+
+
+        $post->save();
+
+        return redirect()->route('post.index');
+
     }
 
     /**
@@ -80,6 +106,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+       $post->delete();
+       return redirect()->route('post.index');
     }
 }

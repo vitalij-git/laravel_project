@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+       $categories=Category::sortable()->paginate(10);
+       return view ('category.index', ['categories'=>$categories]);
     }
 
     /**
@@ -24,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.create');
     }
 
     /**
@@ -35,7 +36,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category=new Category;
+        $category->title=$request->category_title;
+        $category->discription=$request->category_description;
+        $category->visible=$request->category_visible;
+
+        $category->save();
+
+        return redirect()->route('category.index');
     }
 
     /**
@@ -46,7 +54,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('category.show', ['category'=>$category]);
     }
 
     /**
@@ -57,7 +65,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('category.edit', ['category'=>$category]);
     }
 
     /**
@@ -69,7 +77,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->title=$request->category_title;
+        $category->discription=$request->category_description;
+        $category->visible=$request->category_visible;
+
+        $category->save();
+
+        return redirect()->route('category.index');
     }
 
     /**
@@ -80,6 +94,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->save();
+
+        return redirect()->route('category_index');
     }
 }
