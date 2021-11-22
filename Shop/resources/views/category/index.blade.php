@@ -97,7 +97,7 @@
                     url: "{{route('category.store')}}",
                     data: {category_title:category_title, category_shop_id:category_shop_id, category_description:category_description  },
                     success: function(data){
-                        alert(data.success)
+                        alert(data.error)
                         $('.category-fields').toggleClass('d-none');
                     }
                 });

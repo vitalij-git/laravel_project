@@ -171,8 +171,10 @@
     <script>
         $(document).ready(function() {
             $('.summernote').summernote();
+
             $("#show-button").on('click', function(){
                 $('.productsfields').toggleClass('d-none');
+                console.log("nae");
             });
             $.ajaxSetup({
                     headers:{
@@ -192,7 +194,7 @@
                     url: "{{route('product.store')}}",
                     data: {product_title:product_title, product_excerpt:product_excerpt, product_description:product_description, product_price:product_price, product_category_id:product_category_id  },
                     success: function(data){
-                        alert(data.success)
+                        alert(data.error;)
                         $('.productsfields').toggleClass('d-none');
                     }
                 });
