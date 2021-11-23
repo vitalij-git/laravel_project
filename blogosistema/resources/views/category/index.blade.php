@@ -20,6 +20,7 @@
                 <td> {{$category->description}} </td>
                 <td>
                     <a href="{{route('category.edit',[$category])}}" class="btn btn-secondary">{{_('Edit')}}</a>
+                    <a href="{{route('category.show',[$category])}}" class="btn btn-secondary">{{_('Show')}}</a>
                     <form method="post" action="{{route('category.destroy', [$category])}}">
                         @csrf
                         <button class="btn btn-danger" type="submit">{{_('Delete')}}</button>

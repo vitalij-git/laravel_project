@@ -27,6 +27,7 @@ Route::prefix('categories')->group(function(){
     Route::get('edit/{category}', 'CategoryController@edit')->name('category.edit')->middleware("auth");
     Route::post('update/{category}', 'CategoryController@update')->name('category.update')->middleware("auth");
     Route::post('delete/{category}','CategoryController@destroy')->name('category.destroy')->middleware("auth");
+    Route::Get('show/{category}','CategoryController@show')->name('category.show')->middleware("auth");
 });
 
 Route::prefix('posts')->group(function(){

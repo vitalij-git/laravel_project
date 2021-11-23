@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Post;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -54,7 +55,12 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('category.show', ['category'=>$category]);
+        $posts=$category->hasManyPost();
+        $postCount=$posts->count();
+
+
+        return view('category.show', ['postCount'=>$postCount, 'category'=>$category, 'posts'=>$posts]);
+
     }
 
     /**
