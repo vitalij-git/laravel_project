@@ -3,7 +3,6 @@
 @section('content')
 
     <a href="{{route('category.create')}}" class="btn btn-primary">{{_('Create category')}}</a>
-    <button class="btn btn-primary" id="show-button">Add category</button>
     <table class="table table-striped">
 
         <tr>

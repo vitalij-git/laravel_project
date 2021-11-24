@@ -39,11 +39,28 @@ class CategoryController extends Controller
     {
         $category=new Category;
         $category->title=$request->category_title;
-        $category->discription=$request->category_description;
-        $category->visible=$request->category_visible;
+        $category->description=$request->category_description;
+        if($request->category_visible == 1){
+            $category->visible=$request->category_visible;
+        }
+        else{
+            $category->visible=0;
+        }
 
         $category->save();
-
+        $newPost= $request->newPost;
+        if( $newPost =='on'){
+            $postFieldsCount= count($request->post_title);
+            for($i=0;$i<$postFieldsCount;$i++){
+                $post =new Post;
+                $post->title=$request->post_title[$i];
+                $post->description=$request->post_description[$i];
+                $post->content=$request->post_content[$i];
+                $post->image='image';
+                $post->category_id=$category->id;
+                $post->save();
+            }
+        }
         return redirect()->route('category.index');
     }
 
@@ -84,8 +101,13 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $category->title=$request->category_title;
-        $category->discription=$request->category_description;
-        $category->visible=$request->category_visible;
+        $category->description=$request->category_description;
+        if($request->category_visible == 1){
+            $category->visible=$request->category_visible;
+        }
+        else{
+            $category->visible=0;
+        }
 
         $category->save();
 
@@ -100,8 +122,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->save();
+        $category->delete();
 
-        return redirect()->route('category_index');
+        return redirect()->route('category.index');
     }
 }

@@ -43,10 +43,25 @@ class PostController extends Controller
         $post->title=$request->post_title;
         $post->description=$request->post_description;
         $post->content=$request->post_content;
-        $post->category_id=$request->post_category_id;
-        $post->image=$request->post_iamge;
 
+        $post->image="image";
 
+        if($request->newCategory =="1" ){
+            $category=new Category;
+            $category->title=$request->category_title;
+            $category->description=$request->category_description;
+            $post->category_id=$category->id;
+            if($request->category_visible == 1){
+                $category->visible=$request->category_visible;
+            }
+            else{
+                $category->visible=0;
+            }
+            $category->save();
+
+        }
+
+        $post->category_id=$request->categoryID;
         $post->save();
 
         return redirect()->route('post.index');
@@ -89,7 +104,7 @@ class PostController extends Controller
         $post->description=$request->post_description;
         $post->content=$request->post_content;
         $post->category_id=$request->post_category_id;
-        $post->image=$request->post_iamge;
+        $post->image="image";
 
 
         $post->save();

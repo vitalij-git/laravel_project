@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Create category') }}</div>
+                <div class="card-header">{{ __('Create post') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('post.store') }}">
@@ -52,11 +52,11 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="post_shop_id" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
+                        <div class="form-group row category-fields">
+                            <label for="post_category_id" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control @error('post_shop_id') is-invalid @enderror"  name="post_shop_id">
+                                <select class="form-control @error('post_category_id') is-invalid @enderror"  name="post_category_id">
                                     @foreach ($categories as $category)
                                     <option value="{{$category->id}}">{{$category->title}}</option>
                                     @endforeach
@@ -82,6 +82,48 @@
                                 <a href="{{route('post.index')}}" class="btn btn-secondary">{{ __('back') }}</a>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <input type="checkbox" id="newCategory" name="newCategory" value="1"  />
+                            <span>Add new Category</span>
+                        </div>
+                        <div class="category-fields d-none">
+                            <div class="form-group row">
+                                <label for="category_title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="category_title" type="text" class="form-control @error('category_title') is-invalid @enderror" name="category_title" value="{{ old('category_title') }}" >
+
+                                    @error('category_title')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="category_description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+
+                                <div class="col-md-6">
+                                    <textarea id="category_description" type="text" class="form-control summernote @error('category_description') is-invalid @enderror" name="category_description" >
+                                        {{ old('category_description') }}
+                                    </textarea>
+                                    @error('category_description')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="form-check col-md-4 col-form-label text-md-right">
+                                    <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="category_visible" value='1'>
+                                    <label class="form-check-label " for="flexCheckDefault">
+                                        Visible
+                                    </label>
+
+                                  </div>
+                              </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -91,6 +133,9 @@
 <script>
     $(document).ready(function() {
      $('.summernote').summernote();
+     $("#newCategory").click(function(){
+            $('.category-fields').toggleClass('d-none');
+        });
     });
 </script>
 @endsection

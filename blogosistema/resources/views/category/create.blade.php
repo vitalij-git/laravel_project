@@ -48,7 +48,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="form-check col-md-4 col-form-label text-md-right">
-                                <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="category_visible">
+                                <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="category_visible" value='1'>
                                 <label class="form-check-label " for="flexCheckDefault">
                                     Visible
                                 </label>
