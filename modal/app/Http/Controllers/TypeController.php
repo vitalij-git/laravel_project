@@ -16,7 +16,8 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+      $types= Type::all();
+      return view('type.index', ['types'=>$types]);
     }
 
     /**
@@ -254,33 +255,36 @@ class TypeController extends Controller
         $sortCol = $request->sortCol;
         $sortOrder = $request->sortOrder;
 
-        if(!$sortCol && !$sortOrder ){
-            $sortCol='id';
-            $sortOrder='ASC';
+        if($sortCol && $sortOrder ){
+            $types = Type::orderBy($sortCol, $sortOrder)->get();
 
-        }
+            $types_count = count($types);
 
-        $types = Type::orderBy($sortCol, $sortOrder)->get();
+            if ($types_count == 0) {
+                $error = [
+                    'error' => 'There are no types',
+                ];
 
-        $types_count = count($types);
-
-        if ($types_count == 0) {
-            $error = [
-                'error' => 'There are no types',
+                $error_json = response()->json($error);
+                return $error_json;
+            }
+            $success = [
+                'success' => 'types sorted successfuly',
+                'types' => $types
             ];
 
-            $error_json = response()->json($error);
-            return $error_json;
+            $success_json = response()->json($success);
+
+            return $success_json;
+
+        }
+        else{
+            $types=Type::all();
+            return view('type.index', ['types'=>$types]);
         }
 
-        $success = [
-            'success' => 'types sorted successfuly',
-            'types' => $types
-        ];
 
-        $success_json = response()->json($success);
 
-        return $success_json;
 
     }
 }

@@ -191,7 +191,7 @@
     });
     function createTable(types){
         $(".types tbody").html("");
-        $(".types tbody").append("<tr><th>ID</th><th>Title</th><th>Description</th><th>Type</th><th>Actions</th></tr>");
+        $(".types tbody").append("<tr><th>ID</th><th>Title</th><th>Description</th><th>Actions</th></tr>");
         $.each(types, function(key, type){
                 var typeRow = "<tr class='rowType"+ type.id +"'>";
                 typeRow += "<td class='colTypeId'>"+ type.id +"</td>";
@@ -225,8 +225,10 @@
                                     typeRow += "<td class='colTypeTitle'>"+ data.typeTitle +"</td>";
                                     typeRow += "<td class='colTypeDescription'>"+ data.typeDescription +"</td>";
                                     typeRow += "<td>";
-                                    typeRow += "<button type='button' class='btn btn-success show-type' data-typeid='"+ data.typeId +"'>Show</button>";
-                                    typeRow += "<button type='button' class='btn btn-secondary update-type' data-typeid='"+ data.typeId +"'>Update</button>";
+                                    typeRow += "<div class='action-button'>";
+                                    typeRow += "<button type='button' class='btn btn-success show-Type' data-Typeid='"+ type.id +"'>Show</button>";
+                                    typeRow += "<button type='button' class='btn btn-secondary update-type' data-typeid='"+ type.id +"'>Update</button>";
+                                    typeRow += "</div>";
                                     typeRow += "</td>";
                                     typeRow += "</tr>";
                                 $(".types").append(typeRow);

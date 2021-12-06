@@ -81,7 +81,7 @@
             <td class="colArticleId">{{$article->id}}</td>
             <td class="colArticletitle">{{$article->title}}</td>
             <td class="colArticleDescription">{{$article->description}}</td>
-            <td class="colArticleArticleTitle">{{$article->articleType->title}}</td>
+            <td class="colArticleTypeTitle">{{$article->articleType->title}}</td>
             <td>
                 <button type="button" class="btn btn-success show-article" data-articleid='{{$article->id}}'>Show</button>
                 <button type="button" class="btn btn-secondary update-article" data-articleid='{{$article->id}}'>Update</button>
