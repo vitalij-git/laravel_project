@@ -30,6 +30,7 @@ Route::prefix('articles')->group(function () {
     Route::get('searchAjax', 'ArticleController@searchAjax') ->name('article.searchAjax');
     Route::get('filterAjax', 'ArticleController@filterAjax') ->name('article.filterAjax');
     Route::get('indexAjax', 'ArticleController@indexAjax') ->name('article.indexAjax');
+    Route::post('selectedDelete', 'ArticleController@selectedDelete') ->name('article.selectedDelete');
 });
 Route::prefix('types')->group(function () {
     Route::get('','TypeController@index')->name('type.index');

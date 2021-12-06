@@ -23,7 +23,7 @@
 
     <div class="search-form row">
         <div class="col-md-8">
-            <button class="test-delete btn btn-danger" type="button">Test delete</button>
+            <button class="test-delete btn btn-danger" type="button" id="selectedDelete">Delete</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createArticleModal">
                 Create New Article Modal
             </button>
@@ -74,19 +74,20 @@
         <th>Description</th>
         <th>Type</th>
         <th>Actions</th>
+        <th>Delete</th>
     </tr>
 
     @foreach ($articles as $article)
         <tr class="rowArticle{{$article->id}}">
             <td class="colArticleId">{{$article->id}}</td>
-            <td class="colArticletitle">{{$article->title}}</td>
+            <td class="colArticleTitle">{{$article->title}}</td>
             <td class="colArticleDescription">{{$article->description}}</td>
             <td class="colArticleTypeTitle">{{$article->articleType->title}}</td>
             <td>
                 <button type="button" class="btn btn-success show-article" data-articleid='{{$article->id}}'>Show</button>
                 <button type="button" class="btn btn-secondary update-article" data-articleid='{{$article->id}}'>Update</button>
-
             </td>
+            <td><input class="delete-article" type="checkbox"  name="articleDelete[]" value="{{$article->id}}" /></td>
         </tr>
     @endforeach
 </table>
@@ -232,23 +233,25 @@
         $(".articles tbody").html("");
         $(".articles tbody").append("<tr><th>ID</th><th>Title</th><th>Description</th><th>Type</th><th>Actions</th></tr>");
         $.each(articles, function(key, article){
-                var articleRow = "<tr class='rowarticle"+ article.id +"'>";
+                var articleRow = "<tr class='rowArticle"+ article.id +"'>";
                 articleRow += "<td class='colArticleId'>"+ article.id +"</td>";
                 articleRow += "<td class='colArticleName'>"+ article.title +"</td>";
                 articleRow += "<td class='colArticleDescription'>"+ article.description +"</td>";
                 articleRow += "<td class='colArticleTypeTitle'>"+ article.typeTitle +"</td>";
                 articleRow += "<td>";
-                articleRow += "<div class='action-button'>";
+                articleRow += "<span class='action-button'>";
                 articleRow += "<button type='button' class='btn btn-success show-article' data-articleid='"+ article.id +"'>Show</button>";
                 articleRow += "<button type='button' class='btn btn-secondary update-article' data-articleid='"+ article.id +"'>Update</button>";
-                articleRow += "</div>";
+                articleRow += "</span>";
                 articleRow += "</td>";
+                articleRow += '<td><input class="delete-article" type="checkbox"  name="articleDelete[]" value="{{$article->id}}" /></td>';
                 articleRow += "</tr>";
                 $(".articles tbody").append(articleRow);
         });
     }
     $(document).ready(function() {
         $(".addArticleModal").click(function() {
+            $(".alerts").html("");
             var articleTitle = $("#articleTitle").val();
             var articleDescription = $("#articleDescription").val();
             var articleType = $("#articleType").val();
@@ -261,16 +264,22 @@
                                 console.log("veikas");
                                 $(".invalid-feedback").css("display", 'none');
                                 $("#createArticleModal").modal("hide");
-                                var articleRow = "<tr class='rowarticle"+ data.articleId +"'>";
+                                var articleRow = "<tr class='rowArticle"+ data.articleId +"'>";
                                     articleRow += "<td class='colArticleId'>"+ data.articleId +"</td>";
                                     articleRow += "<td class='colArticleTitle'>"+ data.articleTitle +"</td>";
                                     articleRow += "<td class='colArticleDescription'>"+ data.articleDescription +"</td>";
-                                    articleRow += "<td class='colArticleTypeTitle'>"+ data.typeTitle+"</td>";
+                                    articleRow += "<td class='colArticleTypeTitle'>"+ data.articleType+"</td>";
                                     articleRow += "<td>";
+                                    articleRow += "<span class='action-button'>";
                                     articleRow += "<button type='button' class='btn btn-success show-article' data-articleid='"+ data.articleId +"'>Show</button>";
                                     articleRow += "<button type='button' class='btn btn-secondary update-article' data-articleid='"+ data.articleId +"'>Update</button>";
+                                    articleRow += "</span>";
+                                    articleRow += '<td>';
+                                    articleRow += '<input class="delete-article" type="checkbox"  name="articleDelete[]" value="{{$article->id}}" />';
+                                    articleRow += '</td>';
                                     articleRow += "</td>";
                                     articleRow += "</tr>";
+
                                 $(".articles").append(articleRow);
                                 $(".alerts").append("<div class='alert alert-success'>"+ data.success +"</div");
                                 $("#articleTitle").val('');
@@ -302,7 +311,9 @@
             })
         });
 
-        $(".updateArticleModal").click(function() {
+        //$(".updateArticleModal").click(function() {
+            $(document).on('click', '.updateArticleModal', function() {
+                $(".alerts").html("");
             var articleid = $("#edit-articleid").val();
             var articleTitle = $("#edit-articleTitle").val();
             var articleDescription = $("#edit-articleDescription").val();
@@ -316,6 +327,7 @@
                             $(".invalid-feedback").css("display", 'none');
                             $("#editArticleModal").modal("hide");
                             $(".alerts").append("<div class='alert alert-success'>"+ data.success +"</div");
+
                             $(".rowArticle"+ articleid + " .colArticleTitle").html(data.articleTitle);
                             $(".rowArticle"+ articleid + " .colArticleDescription").html(data.articleDescription);
                             $(".rowArticle"+ articleid + " .colArticleTypeTitle").html(data.articleType);
@@ -394,6 +406,29 @@
                     }
                 });
         });
+        $("#selectedDelete").click(function() {
+
+                var articleDelete = [];
+                $.each( $(".delete-article:checked"), function( key, article) {
+                    articleDelete[key] = article.value;
+                });
+                $.ajax({
+                type: 'POST',
+                url: '{{route("article.selectedDelete")}}',
+                data: { articleDelete: articleDelete },
+                success: function(data) {
+                        $(".alerts").html("");
+                        for(var i=0; i<data.messages.length; i++) {
+                            $(".alerts").append("<div class='alert alert-"+data.errorsuccess[i] + "'><p>"+ data.messages[i] + "</p></div>");
+                            var id = data.success[i];
+                            if(data.errorsuccess[i] == "success") {
+                                $(".rowArticle"+id ).remove();
+                            }
+                        }
+
+                    }
+                });
+            })
     });
 </script>
 @endsection

@@ -70,8 +70,8 @@
     @foreach ($types as $type)
         <tr class="rowType{{$type->id}}">
             <td class="colTypeId">{{$type->id}}</td>
-            <td class="colTypetitle">{{$type->title}}</td>
-            <td class="coltypeDescription">{{$type->description}}</td>
+            <td class="colTypeTitle">{{$type->title}}</td>
+            <td class="colTypeDescription">{{$type->description}}</td>
             <td>
                 <button type="button" class="btn btn-success show-type" data-typeid='{{$type->id}}'>Show</button>
                 <button type="button" class="btn btn-secondary update-type" data-typeid='{{$type->id}}'>Update</button>
@@ -209,6 +209,7 @@
     }
     $(document).ready(function() {
         $(".addTypeModal").click(function() {
+            $(".alerts").html("");
             var typeTitle = $("#typeTitle").val();
             var typeDescription = $("#typeDescription").val();
                 $.ajax({
@@ -217,7 +218,6 @@
                         data: {typeTitle:typeTitle, typeDescription:typeDescription},
                         success: function(data) {
                             if($.isEmptyObject(data.error)) {
-                                console.log("veikas");
                                 $(".invalid-feedback").css("display", 'none');
                                 $("#createTypeModal").modal("hide");
                                 var typeRow = "<tr class='rowtype"+ data.typeId +"'>";
@@ -226,8 +226,8 @@
                                     typeRow += "<td class='colTypeDescription'>"+ data.typeDescription +"</td>";
                                     typeRow += "<td>";
                                     typeRow += "<div class='action-button'>";
-                                    typeRow += "<button type='button' class='btn btn-success show-Type' data-Typeid='"+ type.id +"'>Show</button>";
-                                    typeRow += "<button type='button' class='btn btn-secondary update-type' data-typeid='"+ type.id +"'>Update</button>";
+                                    typeRow += "<button type='button' class='btn btn-success show-Type' data-Typeid='"+ data.typeId +"'>Show</button>";
+                                    typeRow += "<button type='button' class='btn btn-secondary update-type' data-typeid='"+ data.typeId +"'>Update</button>";
                                     typeRow += "</div>";
                                     typeRow += "</td>";
                                     typeRow += "</tr>";
@@ -262,6 +262,7 @@
         });
 
         $(".updateTypeModal").click(function() {
+            $(".alerts").html("");
             var typeid = $("#edit-typeid").val();
             var typeTitle = $("#edit-typeTitle").val();
             var typeDescription = $("#edit-typeDescription").val();
@@ -289,6 +290,7 @@
                 })
         });
         $(document).on('click', '.show-type', function() {
+       // $(".show-type").click(function() {
         $('#showTypeModal').modal('show');
         var typeid = $(this).attr("data-typeid");
 

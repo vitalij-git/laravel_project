@@ -314,4 +314,38 @@ class ArticleController extends Controller
         return $success_json;
 
     }
+    public function selectedDelete(Request $request) {
+
+        $articleDelete = $request->articleDelete;
+
+        $messages = array();
+
+
+        $errorsuccess = array();
+
+        foreach($articleDelete as $articleId) {
+            $article = Article::find($articleId);
+                $deleteAction = $article->delete();
+                if($deleteAction) {
+                    $errorsuccess[] = 'success';
+                    $messages[] = "Article ".$articleId." deleted successfully";
+                } else {
+                    $messages[] = "Something went wrong";
+                    $errorsuccess[] = 'danger';
+                }
+
+        }
+
+
+        $success = [
+            'success' => $articleDelete,
+            'messages' => $messages,
+            'errorsuccess' => $errorsuccess
+        ];
+
+        $success_json = response()->json($success);
+
+        return $success_json;
+
+    }
 }
